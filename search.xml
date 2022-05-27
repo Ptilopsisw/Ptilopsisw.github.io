@@ -3,7 +3,8 @@
   <entry>
     <title>板子</title>
     <url>/2022/05/19/%E6%9D%BF%E5%AD%90/</url>
-    <content><![CDATA[<span id="more"></span>
+    <content><![CDATA[<p>一些好用的板子（快读、高精、矩阵）</p>
+<span id="more"></span>
 
 <h2 id="快读"><a href="#快读" class="headerlink" title="快读"></a>快读</h2><h3 id="update5"><a href="#update5" class="headerlink" title="update5"></a>update5</h3><p>现在可以用小数辣！支持<code>float</code>和<code>double</code>(当然<code>long double</code>勉强能用，出锅了别来找我qwq).</p>
 <p>保留小数的话可以用<code>setpcs()</code>函数，例如<code>setpcs(5)</code>就是按四舍五入保留 $ 5 $ 位小数.</p>
@@ -37,10 +38,21 @@
   <entry>
     <title>网络流</title>
     <url>/2022/05/27/%E7%BD%91%E7%BB%9C%E6%B5%81/</url>
-    <content><![CDATA[<span id="more"></span>
+    <content><![CDATA[<p>emmm</p>
+<span id="more"></span>
 
 <p>一些技术原因（其实还是懒），我没搞下来我的课件markdown源码，先看<a href="https://misaka-mikoto233.github.io/2022/02/07/%E7%BD%91%E7%BB%9C%E6%B5%81/?t=1653647760023">这个</a>代替吧.</p>
 ]]></content>
+      <categories>
+        <category>114514</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>test</title>
+    <url>/2022/05/27/test/</url>
+    <content><![CDATA[<details>
+    114514
+</details>]]></content>
       <categories>
         <category>114514</category>
       </categories>
