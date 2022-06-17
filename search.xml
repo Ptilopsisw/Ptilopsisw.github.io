@@ -7,7 +7,7 @@
 <p>保留小数的话可以用<code>setpcs()</code>函数，例如<code>setpcs(5)</code>就是按四舍五入保留 $ 5 $ 位小数.</p>
 <p>可以用 <code>cout &lt;&lt; setpcs(5) &lt;&lt; ans;</code> 或者 <code>print(setpcs(5), ans);</code> 两种方法.</p>
 <p>也可以在程序最开头写上<code>setpcs(5)</code>,这样所有小数输出都会保留 $ 5 $ 位小数了.</p>
-<h3 id="update4"><a href="#update4" class="headerlink" title="update4"></a>update4</h3><p>可以用 <code>read&lt;int&gt;()</code> 获得一个 <code>int</code> 型数据，或者 <code>read&lt;long long&gt;()</code> 获得一个 <code>long long</code> 型数据,<br>即 <code>a = read&lt;int&gt;()</code> ，但是只能读整数，不要传入字符串或浮点数.</p>
+<h3 id="update4"><a href="#update4" class="headerlink" title="update4"></a>update4</h3><p>可以用 <code>read&lt;int&gt;()</code> 获得一个 <code>int</code> 型数据，或者 <code>read&lt;long long&gt;()</code> 获得一个 <code>long long</code> 型数据，即 <code>a = read&lt;int&gt;()</code> .</p>
 <h3 id="update3"><a href="#update3" class="headerlink" title="update3"></a>update3</h3><p>已通过 <code>#ifdef</code> 方式实现在OJ上用 <code>fread</code> ,在本地上用 <code>cstdio</code> 库输入输出，本地debug不需要文件读写了.</p>
 <h3 id="update2"><a href="#update2" class="headerlink" title="update2"></a>update2</h3><p>可以用 <code>io&gt;&gt;a&gt;&gt;b</code> , <code>io&lt;&lt;a&lt;&lt;b</code>, <code>io&gt;&gt;a&lt;&lt;a</code> ，还写上了 <code>#define cin io</code> , <code>#define cout io</code> , <code>#define endl &#39;\n&#39;</code> ，使用 <code>cin</code> 的话可以直接把板子贴上去无需修改.</p>
 <h3 id="update1"><a href="#update1" class="headerlink" title="update1"></a>update1</h3><p>已修复无法<code>while(read(a))</code>的bug.</p>
