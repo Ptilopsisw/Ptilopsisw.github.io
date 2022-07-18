@@ -39,13 +39,13 @@
 <p>您的 clangd 在 <code>\LLVM\bin\clangd.exe</code> ，将此路径复制到设置的 <code>Clangd: Path</code> 里。</p>
 <p>配置好之后需要关闭 C/C++ 自带的补全功能， 在设置中将 <code>C_Cpp: Intelli Sense Engine</code> 设为 <code>Disabled</code> 即可。</p>
 <p>此时您会发现它检测不到您的头文件，以及报出一些奇奇怪怪的错误，是因为 clang 在windows 下没有自带的头文件，需要让它使用 mingw64 的头文件。</p>
-<p>在设置的 <code>Clangd: Fallback Flags</code> 中添加命令:</p>
+<p>在设置的 <code>Clangd: Fallback Flags</code> 中添加下列代码然后重启VSCode即可。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">--target=x86_64-pc-mingw64 // 64位</span><br><span class="line">--target=i686-pc-mingw64   // 32位</span><br></pre></td></tr></table></figure>
-<p>添加完毕之后重启 VSCode 即可发现没有问题。</p>
-<h2 id="关闭clang-tidy功能"><a href="#关闭clang-tidy功能" class="headerlink" title="关闭clang-tidy功能"></a>关闭clang-tidy功能</h2><p>如果您的码风与众不同，比如不喜欢短句缩进之类的，clang-tidy会找出未缩进语句并给个warning，此时您可以关闭clang-tidy功能防止它打扰您敲代码</p>
-<p>在设置的 <code>Clangd: Arguments</code> 中添加 <code>--clang-tidy=false</code> 即可。 </p>
-<h2 id="关闭函数名提示"><a href="#关闭函数名提示" class="headerlink" title="关闭函数名提示"></a>关闭函数名提示</h2><p>在 <code>C:\users\用户名\AppData\Local\clangd\config.yaml</code> 中添加如下代码:</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">InlayHints:</span> </span><br><span class="line">  <span class="attr">Enabled:</span> <span class="literal">Yes</span></span><br><span class="line">  <span class="attr">ParameterNames:</span> <span class="literal">No</span></span><br><span class="line">  <span class="attr">DeducedTypes:</span> <span class="literal">Yes</span></span><br></pre></td></tr></table></figure>]]></content>
+<h2 id="关闭clang-tidy功能"><a href="#关闭clang-tidy功能" class="headerlink" title="关闭clang-tidy功能"></a>关闭clang-tidy功能</h2><p>如果您的码风与众不同，比如不喜欢短句缩进之类的，clang-tidy会找出未缩进语句并给个warning，此时您可以关闭clang-tidy功能防止它打扰您敲代码。</p>
+<p>在设置的 <code>Clangd: Arguments</code> 中添加 <code>--clang-tidy=false</code> 然后重启VSCode即可。 </p>
+<h2 id="关闭函数变量名提示"><a href="#关闭函数变量名提示" class="headerlink" title="关闭函数变量名提示"></a>关闭函数变量名提示</h2><p>在 <code>C:\users\用户名\AppData\Local\clangd\config.yaml</code> 中添加下列代码然后重启VSCode即可。</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">InlayHints:</span> </span><br><span class="line">  <span class="attr">Enabled:</span> <span class="literal">Yes</span></span><br><span class="line">  <span class="attr">ParameterNames:</span> <span class="literal">No</span></span><br><span class="line">  <span class="attr">DeducedTypes:</span> <span class="literal">Yes</span></span><br></pre></td></tr></table></figure>
+]]></content>
   </entry>
   <entry>
     <title>快读快写板子</title>
