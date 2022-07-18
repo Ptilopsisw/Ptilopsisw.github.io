@@ -23,6 +23,9 @@
 <h3 id="自定义指令"><a href="#自定义指令" class="headerlink" title="自定义指令"></a>自定义指令</h3><p>在settings.json中:<br><figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;command-runner.commands&quot;</span> <span class="punctuation">:</span><span class="punctuation">&#123;</span></span><br><span class="line">	<span class="attr">&quot;命令名称1&quot;</span><span class="punctuation">:</span> <span class="string">&quot;命令&quot;</span><span class="punctuation">,</span></span><br><span class="line">  	<span class="comment">//你可以用[],但是它tm会在你写的每个命令后面加上逗号...</span></span><br><span class="line">	<span class="comment">//所以你先写出来要用的命令，然后用 &amp;&amp; 连接压成1行就行了</span></span><br><span class="line">  </span><br><span class="line">	<span class="attr">&quot;命令名称2&quot;</span><span class="punctuation">:</span> <span class="string">&quot;命令&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></p>
 <p>在keybindings.json中:<br><figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="comment">//一组快捷键</span></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;key&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;你要设的快捷键&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;command-runner.run&quot;</span><span class="punctuation">,</span><span class="comment">//先调用Command Runner</span></span><br><span class="line">    <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;在command-runner.commands中的命令名称&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;terminal&quot;</span><span class="punctuation">:</span> <span class="string">&quot;runCommand&quot;</span><span class="comment">//终端</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"><span class="comment">//想多设几个就多copy几遍</span></span><br></pre></td></tr></table></figure></p>
 ]]></content>
+      <categories>
+        <category>VSCode插件</category>
+      </categories>
   </entry>
   <entry>
     <title>Windows+VSCode 中使用 clangd</title>
@@ -46,6 +49,9 @@
 <h2 id="关闭函数变量名提示"><a href="#关闭函数变量名提示" class="headerlink" title="关闭函数变量名提示"></a>关闭函数变量名提示</h2><p>在 <code>C:\users\用户名\AppData\Local\clangd\config.yaml</code> 中添加下列代码然后重启VSCode即可。</p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">InlayHints:</span> </span><br><span class="line">  <span class="attr">Enabled:</span> <span class="literal">Yes</span></span><br><span class="line">  <span class="attr">ParameterNames:</span> <span class="literal">No</span></span><br><span class="line">  <span class="attr">DeducedTypes:</span> <span class="literal">Yes</span></span><br></pre></td></tr></table></figure>
 ]]></content>
+      <categories>
+        <category>VSCode插件</category>
+      </categories>
   </entry>
   <entry>
     <title>快读快写板子</title>
