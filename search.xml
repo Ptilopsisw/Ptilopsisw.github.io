@@ -143,22 +143,22 @@ S(n)
 -
 \sum _{i=2} ^{n}
     g(d) S(\lfloor \frac{n}{d} \rfloor)</script><p>如果我们可以快速求出 $ h(i) $ 的前缀和还有 $ g(n) $ 的函数值，那么问题就可以用整除分块+递归求解了。</p>
-<h3 id="常见的积性函数"><a href="#常见的积性函数" class="headerlink" title="常见的积性函数"></a>常见的积性函数</h3><p>积性函数:<br>$ \varphi $ , $ \mu $ , $ \sigma $ , $ \operatorname{d} $</p>
-<p>完全积性函数:<br>$ \varepsilon $ , $ \operatorname{I} $ , $ \operatorname{id} $</p>
+<h3 id="常见的积性函数"><a href="#常见的积性函数" class="headerlink" title="常见的积性函数"></a>常见的积性函数</h3><p>积性函数:<br>$ \operatorname{\varphi} $ , $ \mu $ , $ \sigma $ , $ \operatorname{d} $</p>
+<p>完全积性函数:<br>$ \operatorname{\varepsilon} $ , $ \operatorname{I} $ , $ \operatorname{id} $</p>
 <p>其中:</p>
 <script type="math/tex; mode=display">
 
-\varepsilon(n) = [n=1]
+\operatorname{\varepsilon(n)} = [n=1]
 
-\newline
+\\
 
 \operatorname{I}(n) = 1
 
-\newline
+\\
 
 \operatorname{id_k}(n) = n^k
 
-\newline
+\\
 
 \sigma _k (n) = \sum _{d|n} d^k</script>]]></content>
       <categories>
