@@ -96,7 +96,7 @@ ba^B
 \frac{a}{d_1} \cdot a^{x-1}
 \equiv
 \frac{b}{d_1}
-\pmod{ \frac{p}{d_1} }</script><p>若 $ d_1 $ 和 $ d_1 $ 不互质就再除，直到 $ a \perp \frac{p}{d_1 d_2 \cdots d_k} $。</p>
+\pmod{ \frac{p}{d_1} }</script><p>若 $ p $ 和 $ d_1 $ 不互质就再除，直到 $ a \perp \frac{p}{d_1 d_2 \cdots d_k} $。</p>
 <p>记 $ D = \prod _{ i=1 } ^{k} d_i $ ，所以我们得到了:</p>
 <script type="math/tex; mode=display">
 \frac{a^k}{D} \cdot a^{x-k}
