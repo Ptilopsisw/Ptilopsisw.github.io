@@ -82,18 +82,22 @@
 <p>方程的解满足 $ 0 \le x &lt; p $ 。</p>
 <p>令 $ x = A \lceil \sqrt{p} \rceil - B$ ，其中 $ 0 \le A,B \le \lceil \sqrt{p} \rceil $ ，所以</p>
 <script type="math/tex; mode=display">
+
 a^{A \lceil \sqrt{p} \rceil}
 \equiv
 ba^B
-\pmod{ p }</script><p>可以先算出等式右边 $ ba^B $ 的所有取值，将其存到一个 hash 表里，然后计算 $ a^{A \lceil \sqrt{p} \rceil} $ 并查表寻找是否有相等值，即可得到 $ x $ 。</p>
-<p>因为 $ A,B \le \sqrt{p} $<br>，所以时间复杂度就是 $ O(\sqrt{p}) $</p>
+\pmod{ p }</script><p>可以先算出等式右边 $ ba^B $ 的所有取值，将其存到一个 hash 表里。<br>然后计算 $ a^{A \lceil \sqrt{p} \rceil} $ 并查表寻找是否有相等值，即可得到 $ x $ 。</p>
+<p>因为 $ A,B \le \sqrt{p} $ ，所以时间复杂度就是 $ O(\sqrt{p}) $</p>
 <h3 id="扩展BSGS"><a href="#扩展BSGS" class="headerlink" title="扩展BSGS"></a>扩展BSGS</h3><p>现在 $ a $ 与 $ p $ 不一定互质。</p>
-<p>不互质就硬搞成互质的，设 $ d_1 = \gcd(a,p) $ ，如果 $ d_1 \nmid b$ ，则方程无解，否则把方程同时除以 $ d_1 $ ，得到:</p>
+<p>不互质就硬搞成互质的，设 $ d_1 = \gcd(a,p) $ 。</p>
+<p>如果 $ d_1 \nmid b $ ，则方程无解，否则把方程同时除以 $ d_1 $ ，得到:</p>
 <script type="math/tex; mode=display">
+
 \frac{a}{d_1} \cdot a^{x-1}
 \equiv
 \frac{b}{d_1}
-\pmod{ \frac{p}{d_1} }</script><p>若 $ a $ 和 $ \frac{p}{d<em>i} $ 不互质就再除，直到 $ a \perp \frac{p}{d_1d_2 \cdots d_k} $ ，记 $ D = \prod </em>{i=1} ^{k} d_i $ ，所以我们得到了:</p>
+\pmod{ \frac{p}{d_1} }</script><p>若 $ d_1 $ 和 $ d_1 $ 不互质就再除，直到 $ a \perp \frac{p}{d_1 d_2 \cdots d_k} $。</p>
+<p>记 $ D = \prod _{ i=1 } ^{k} d_i $ ，所以我们得到了:</p>
 <script type="math/tex; mode=display">
 \frac{a^k}{D} \cdot a^{x-k}
 \equiv
