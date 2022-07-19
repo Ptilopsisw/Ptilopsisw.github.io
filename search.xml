@@ -147,20 +147,23 @@ S(n)
 <p>完全积性函数:<br>$ \operatorname{\varepsilon} $ , $ \operatorname{I} $ , $ \operatorname{id} $</p>
 <p>其中:</p>
 <script type="math/tex; mode=display">
+\begin{aligned}
 
-\operatorname{\varepsilon(n)} = [n=1]
+& \operatorname{\varepsilon(n)} = [n=1]
 
-\\
+\\ \\
 
-\operatorname{I}(n) = 1
+& \operatorname{I}(n) = 1
 
-\\
+\\ \\
 
-\operatorname{id_k}(n) = n^k
+& \operatorname{id_k}(n) = n^k
 
-\\
+\\ \\
 
-\sigma _k (n) = \sum _{d|n} d^k</script>]]></content>
+& \sigma _k (n) = \sum _{d|n} d^k
+
+\end{aligned}</script>]]></content>
       <categories>
         <category>学习笔记</category>
       </categories>
