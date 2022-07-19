@@ -76,6 +76,96 @@
       </categories>
   </entry>
   <entry>
+    <title>数论学习笔记</title>
+    <url>/2022/07/19/%E6%95%B0%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="数论学习笔记"><a href="#数论学习笔记" class="headerlink" title="数论学习笔记"></a>数论学习笔记</h1><h2 id="杜教筛"><a href="#杜教筛" class="headerlink" title="杜教筛"></a>杜教筛</h2><p>用来快速求积性函数前缀和。</p>
+<p>设给定的积性函数为 $ f(n) $，所以我们设 $ S(n) $ 为 $ f $ 函数的前缀和:</p>
+<script type="math/tex; mode=display">
+S(n) =
+    \sum _{i=1} ^{n}
+        f(i)</script><p>现在的目标就是求出 $ S(n) $ 的值</p>
+<p>考虑构造一个合适的积性函数 $ g(n) $，然后求他们卷积 $ h(n) $ 的前缀和:</p>
+<script type="math/tex; mode=display">
+\sum _{i=1} ^{n}
+    h(i)
+
+=
+
+\sum _{i=1} ^{n}
+    (f \ast g)(i)</script><p>由卷积定义得：</p>
+<script type="math/tex; mode=display">
+\sum _{i=1} ^{n}
+    h(i)
+
+=
+
+\sum _{i=1} ^{n}
+    \sum _{d|i}
+        f(d) g(\frac{i}{d})</script><p>把 $ d $ 和 $ g(\frac{i}{d}) $ 提到前面:</p>
+<script type="math/tex; mode=display">
+\sum _{i=1} ^{n}
+    h(i)
+
+=
+
+\sum _{d=1} ^{n}
+    g(d)
+    \sum _{i=1} ^{\lfloor \frac{n}{d} \rfloor}
+        f(i)</script><p>后面那个求和就是 $ f $ 的前缀和:</p>
+<script type="math/tex; mode=display">
+
+\sum _{i=1} ^{n}
+    h(i)
+
+=
+
+\sum _{d=1} ^{n}
+    g(d) S(\lfloor \frac{n}{d} \rfloor)</script><p>因为我们求解的是 $ S(n) $，所以将 $ d=1 $ 与 $ d&gt;1 $ 分开计算:</p>
+<script type="math/tex; mode=display">
+
+\sum _{i=1} ^{n}
+    h(i)
+
+=
+
+g(1)S(n)
++
+\sum _{i=2} ^{n}
+    g(d) S(\lfloor \frac{n}{d} \rfloor)</script><p>其中 $ g $ 是积性函数，所以 $ g(1) = 1 $，移项得:</p>
+<script type="math/tex; mode=display">
+
+S(n)
+
+=
+
+\sum _{i=1} ^{n}
+    h(i)
+-
+\sum _{i=2} ^{n}
+    g(d) S(\lfloor \frac{n}{d} \rfloor)</script><p>如果我们可以快速求出 $ h(i) $ 的前缀和还有 $ g(n) $ 的函数值，那么问题就可以用整除分块+递归求解了。</p>
+<h3 id="常见的积性函数"><a href="#常见的积性函数" class="headerlink" title="常见的积性函数"></a>常见的积性函数</h3><p>积性函数:<br>$ \varphi $ , $ \mu $ , $ \sigma $ , $ \operatorname{d} $</p>
+<p>完全积性函数:<br>$ \varepsilon $ , $ \operatorname{I} $ , $ \operatorname{id} $</p>
+<p>其中:</p>
+<script type="math/tex; mode=display">
+
+\varepsilon(n) = [n=1]
+
+\newline
+
+\operatorname{I}(n) = 1
+
+\newline
+
+\operatorname{id_k}(n) = n^k
+
+\newline
+
+\sigma _k (n) = \sum _{d|n} d^k</script>]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+  </entry>
+  <entry>
     <title>矩阵运算板子</title>
     <url>/2022/06/05/%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97%E6%9D%BF%E5%AD%90/</url>
     <content><![CDATA[<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>声明一个矩阵: <code>matrix a;</code></p>
@@ -218,96 +308,6 @@
 ]]></content>
       <categories>
         <category>模板</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>数论学习笔记</title>
-    <url>/2022/07/19/%E6%95%B0%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="数论学习笔记"><a href="#数论学习笔记" class="headerlink" title="数论学习笔记"></a>数论学习笔记</h1><h2 id="杜教筛"><a href="#杜教筛" class="headerlink" title="杜教筛"></a>杜教筛</h2><p>用来快速求积性函数前缀和。</p>
-<p>设给定的积性函数为 $ f(n) $，所以我们设 $ S(n) $ 为 $ f $ 函数的前缀和:</p>
-<script type="math/tex; mode=display">
-S(n) =
-    \sum _{i=1} ^{n}
-        f(i)</script><p>现在的目标就是求出 $ S(n) $ 的值</p>
-<p>考虑构造一个合适的积性函数 $ g(n) $，然后求他们卷积 $ h(n) $ 的前缀和:</p>
-<script type="math/tex; mode=display">
-\sum _{i=1} ^{n}
-    h(i)
-
-=
-
-\sum _{i=1} ^{n}
-    (f \ast g)(i)</script><p>由卷积定义得：</p>
-<script type="math/tex; mode=display">
-\sum _{i=1} ^{n}
-    h(i)
-
-=
-
-\sum _{i=1} ^{n}
-    \sum _{d|i}
-        f(d) g(\frac{i}{d})</script><p>把 $ d $ 和 $ g(\frac{i}{d}) $ 提到前面:</p>
-<script type="math/tex; mode=display">
-\sum _{i=1} ^{n}
-    h(i)
-
-=
-
-\sum _{d=1} ^{n}
-    g(d)
-    \sum _{i=1} ^{\lfloor \frac{n}{d} \rfloor}
-        f(i)</script><p>后面那个求和就是 $ f $ 的前缀和:</p>
-<script type="math/tex; mode=display">
-
-\sum _{i=1} ^{n}
-    h(i)
-
-=
-
-\sum _{d=1} ^{n}
-    g(d) S(\lfloor \frac{n}{d} \rfloor)</script><p>因为我们求解的是 $ S(n) $，所以将 $ d=1 $ 与 $ d&gt;1 $ 分开计算:</p>
-<script type="math/tex; mode=display">
-
-\sum _{i=1} ^{n}
-    h(i)
-
-=
-
-g(1)S(n)
-+
-\sum _{i=2} ^{n}
-    g(d) S(\lfloor \frac{n}{d} \rfloor)</script><p>其中 $ g $ 是积性函数，所以 $ g(1) = 1 $，移项得:</p>
-<script type="math/tex; mode=display">
-
-S(n)
-
-=
-
-\sum _{i=1} ^{n}
-    h(i)
--
-\sum _{i=2} ^{n}
-    g(d) S(\lfloor \frac{n}{d} \rfloor)</script><p>如果我们可以快速求出 $ h(i) $ 的前缀和还有 $ g(n) $ 的函数值，那么问题就可以用整除分块+递归求解了。</p>
-<h3 id="常见的积性函数"><a href="#常见的积性函数" class="headerlink" title="常见的积性函数"></a>常见的积性函数</h3><p>积性函数:<br>$ \varphi $ , $ \mu $ , $ \sigma $ , $ \operatorname{d} $</p>
-<p>完全积性函数:<br>$ \varepsilon $ , $ \operatorname{I} $ , $ \operatorname{id} $</p>
-<p>其中:</p>
-<script type="math/tex; mode=display">
-
-\varepsilon(n) = [n=1]
-
-\newline
-
-\operatorname{I}(n) = 1
-
-\newline
-
-\operatorname{id_k}(n) = n^k
-
-\newline
-
-\sigma _k (n) = \sum _{d|n} d^k</script>]]></content>
-      <categories>
-        <category>学习笔记</category>
       </categories>
   </entry>
 </search>
