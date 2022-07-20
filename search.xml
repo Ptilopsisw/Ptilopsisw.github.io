@@ -234,7 +234,7 @@ S(n,x+1)
     \left(
         G(\lfloor \frac{n}{p_x^i} \rfloor, tot+1)
         -
-        \sum _{p \in Prime} ^{p \le p_{x-1}}
+        \sum _{p \in Prime} ^{p \le p_{x}}
             f(p)
         +
         S(\lfloor \frac{n}{p_x^i} \rfloor, x+1)
