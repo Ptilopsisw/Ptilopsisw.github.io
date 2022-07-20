@@ -195,9 +195,52 @@ S(n)
 \\
 & \operatorname{\varphi} \ast \operatorname{I} = \operatorname{id_1}
 \\
-& \mu \ast \operatorname{id_1} = \phi
+& \mu \ast \operatorname{id_1} = \operatorname{\varphi}
 
-\end{aligned}</script>]]></content>
+\end{aligned}</script><h2 id="Min-25筛"><a href="#Min-25筛" class="headerlink" title="Min_25筛"></a>Min_25筛</h2><p>求积性函数 $ f(x) $ 前缀和，其中 $ f(p^k), p \in Prime $ 可快速求出。</p>
+<p>下面式子中设 $ p $ 为一个质数， $ p_x $ 为第 $ x $ 个质数</p>
+<ol>
+<li><p>设完全积性函数 $ g(x) $ ，且 $ g(p) = f(p), p \in Prime $</p>
+</li>
+<li><p>设 $ G(n,x) $ 为 $ [1,n] $ 中质数或最小质因子大于等于 $ p_x $ 的和数的 $ g $ 值的和，所以有递推式:</p>
+</li>
+</ol>
+<script type="math/tex; mode=display">
+G(n,x+1)
+=
+G(n,x)
+-
+g(p_x)
+\left(
+    G(\lfloor \frac{n}{p_x}, x)
+    -
+    \sum _{p \in Prime} ^{p \le p_{x-1}}
+        g(p)
+\right)</script><ol>
+<li>设 $ S(n,x) $ 为 $ [1,n] $ 中最小质因子大于等于 $ p_x $ 的合数的 $ f $ 值的和，$ tot $ 为 $ [1,n] $ 中质数的个数，递推式:</li>
+</ol>
+<script type="math/tex; mode=display">
+
+S(n,x)
+=
+S(n,x+1) 
++
+\sum _{i=1} ^{p_x^{i+1} \le n}
+\left(
+    f(p_x^{i+1})
+    +
+    f(p_x^i)
+    \cdot
+    \left(
+        G(\lfloor \frac{n}{p_x^i} \rfloor, tot+1)
+        -
+        \sum _{p \in Prime} ^{p \le p_{x-1}}
+            f(p)
+        +
+        S(\lfloor \frac{n}{p_x^i} \rfloor, x+1)
+    \right)
+
+\right)</script>]]></content>
       <categories>
         <category>学习笔记</category>
       </categories>
