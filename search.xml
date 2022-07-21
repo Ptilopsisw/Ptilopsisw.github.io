@@ -241,15 +241,29 @@ S(n,x+1)
     \right)
 
 \right)</script><h2 id="类欧几里得算法"><a href="#类欧几里得算法" class="headerlink" title="类欧几里得算法"></a>类欧几里得算法</h2><p>用来求一些奇奇怪怪的式子</p>
-<script type="math/tex; mode=display">
-f(a,b,c,n)
+<script type="math/tex; mode=display">\begin{aligned}
+& f(a,b,c,n)
 =
-\sum _{i=0} ^{n}
-    \lfloor \frac{ai+b}{c} \rfloor</script><p>无特殊说明，以下数学公式中以 $ \% $ 代替 $ \bmod $。</p>
-<p>分两种情况:</p>
-<ol>
-<li>$ a \ge c \space or \space b \ge c $ 时:</li>
-</ol>
+\sum _{i=0} ^n
+    \lfloor \frac{ai+b}{c} \rfloor
+
+\\
+
+& g(a,b,c,n)
+=
+\sum _{i=0} ^n
+    \lfloor \frac{ai+b}{c} \rfloor i
+
+\\
+
+& h(a,b,c,n)
+=
+\sum _{i=0} ^n
+    \lfloor \frac{ai+b}{c} \rfloor ^2
+
+\end{aligned}</script><p>无特殊说明，以下数学公式中以 $ \% $ 代替 $ \bmod $。</p>
+<h3 id="函数-f-a-b-c-n"><a href="#函数-f-a-b-c-n" class="headerlink" title="函数 f(a,b,c,n)"></a>函数 f(a,b,c,n)</h3><p>分两种情况:</p>
+<p>$ a \ge c \space or \space b \ge c $ 时:</p>
 <script type="math/tex; mode=display">\begin{aligned}
 
 f(a,b,c,n)
@@ -291,9 +305,7 @@ f(a\%c, b\%c, c, n)
 
 
 \end{aligned}</script><p>这样我们就能把 $ a $ 和 $ b $ 缩小范围了。</p>
-<ol>
-<li>$ a &lt; c \space and \space b &lt; c $ 时:</li>
-</ol>
+<p>$ a &lt; c \space and \space b &lt; c $ 时:</p>
 <script type="math/tex; mode=display">\begin{aligned}
 f(a,b,c,n)
 & =
@@ -405,7 +417,7 @@ f(a,b,c,n)
 
 \end{cases}
 
-\end{aligned}</script><h2 id="生成函数"><a href="#生成函数" class="headerlink" title="生成函数"></a>生成函数</h2><h3 id="普通生成函数-OGF"><a href="#普通生成函数-OGF" class="headerlink" title="普通生成函数(OGF)"></a>普通生成函数(OGF)</h3><p>对于一个序列 $ a $ ，它的普通生成函数定义为形式幂级数: $ F(x) = \sum _{i} a_i x^i $</p>
+\end{aligned}</script><h3 id="函数-g-a-b-c-n"><a href="#函数-g-a-b-c-n" class="headerlink" title="函数 g(a,b,c,n)"></a>函数 g(a,b,c,n)</h3><h2 id="生成函数"><a href="#生成函数" class="headerlink" title="生成函数"></a>生成函数</h2><h3 id="普通生成函数-OGF"><a href="#普通生成函数-OGF" class="headerlink" title="普通生成函数(OGF)"></a>普通生成函数(OGF)</h3><p>对于一个序列 $ a $ ，它的普通生成函数定义为形式幂级数: $ F(x) = \sum _{i} a_i x^i $</p>
 <p>也就是将 $ a $ 中每一项作为多项式的系数。</p>
 <h4 id="基本运算"><a href="#基本运算" class="headerlink" title="基本运算"></a>基本运算</h4><p>设两个序列 $ a,b $ 的生成函数分别为 $ F(x), G(x) $ ，则有</p>
 <script type="math/tex; mode=display">
