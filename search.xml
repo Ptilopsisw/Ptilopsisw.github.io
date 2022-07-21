@@ -127,7 +127,7 @@ S(n) =
 
 \sum _{i=1} ^{n}
     \sum _{d|i}
-        f(d) g(\frac{i}{d})</script><p>把 $ d $ 和 $ g(\frac{i}{d}) $ 提到前面</p>
+        f(\frac{i}{d}) g(d)</script><p>把 $ d $ 和 $ g(d) $ 提到前面</p>
 <script type="math/tex; mode=display">
 \sum _{i=1} ^{n}
     h(i)
@@ -156,7 +156,7 @@ S(n) =
 
 g(1)S(n)
 +
-\sum _{i=2} ^{n}
+\sum _{d=2} ^{n}
     g(d) S(\lfloor \frac{n}{d} \rfloor)</script><p>其中 $ g $ 是积性函数，所以 $ g(1) = 1 $，移项得</p>
 <script type="math/tex; mode=display">
 
@@ -167,8 +167,8 @@ S(n)
 \sum _{i=1} ^{n}
     h(i)
 -
-\sum _{i=2} ^{n}
-    g(d) S(\lfloor \frac{n}{d} \rfloor)</script><p>如果我们可以快速求出 $ h(i) $ 的前缀和还有 $ g(n) $ 的函数值，那么问题就可以用整除分块+递归求解了。</p>
+\sum _{d=2} ^{n}
+    g(d) S(\lfloor \frac{n}{d} \rfloor)</script><p>如果我们可以快速求出 $ h(i) $ 和 $ g(n) $ 的前缀和，那么问题就可以用整除分块+递归求解了。</p>
 <h3 id="常见的积性函数"><a href="#常见的积性函数" class="headerlink" title="常见的积性函数"></a>常见的积性函数</h3><p>积性函数: $ \operatorname{\varphi} $ , $ \mu $ , $ \sigma $ , $ \operatorname{d} $</p>
 <p>完全积性函数: $ \operatorname{\varepsilon} $ , $ \operatorname{I} $ , $ \operatorname{id} $</p>
 <p>其中</p>
@@ -358,12 +358,13 @@ f(a,b,c,d)
 
 & =
 \sum _{j=0} ^{m-1}
+\left(
     n
     -
     \left\lfloor
     \frac{cj+c-b-1}{a}
     \right\rfloor
-
+\right) 
 \\
 
 & =
@@ -379,7 +380,7 @@ mn
 & =
 mn
 -
-f(c,c-b-1,a,n)
+f(c,c-b-1,a,m-1)
 
 \end{aligned}</script><p>所以我们得到了 $ f $ 的递归解法，递归过程就像是欧几里得算法求 $ \gcd $ 一样，所以是类欧几里得算法</p>
 <script type="math/tex; mode=display">\begin{aligned}
