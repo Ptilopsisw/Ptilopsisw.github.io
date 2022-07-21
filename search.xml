@@ -404,9 +404,88 @@ f(a,b,c,n)
 
 \end{cases}
 
-\end{aligned}</script><h2 id="生成函数"><a href="#生成函数" class="headerlink" title="生成函数"></a>生成函数</h2><h3 id="普通生成函数-OGF"><a href="#普通生成函数-OGF" class="headerlink" title="普通生成函数(OGF)"></a>普通生成函数(OGF)</h3><p>对于一个数列 $ a $ ，它的普通生成函数 $ F(x) = \sum _{i} a_i x^i $</p>
+\end{aligned}</script><h2 id="生成函数"><a href="#生成函数" class="headerlink" title="生成函数"></a>生成函数</h2><h3 id="普通生成函数-OGF"><a href="#普通生成函数-OGF" class="headerlink" title="普通生成函数(OGF)"></a>普通生成函数(OGF)</h3><p>对于一个序列 $ a $ ，它的普通生成函数定义为形式幂级数: $ F(x) = \sum _{i} a_i x^i $</p>
 <p>也就是将 $ a $ 中每一项作为多项式的系数。</p>
-<h4 id="基本运算"><a href="#基本运算" class="headerlink" title="基本运算"></a>基本运算</h4>]]></content>
+<h4 id="基本运算"><a href="#基本运算" class="headerlink" title="基本运算"></a>基本运算</h4><p>设两个序列 $ a,b $ 的生成函数分别为 $ F(x), G(x) $ ，则有</p>
+<script type="math/tex; mode=display">
+F(x) \pm G(x)
+=
+\sum _{i} (a_i \pm b_i)x^i</script><p>也就是序列 $ \langle a_i \pm b_i \rangle $ 的生成函数为 $ F(x) \pm G(x) $。</p>
+<p>考虑乘法运算，也就是多项式卷积</p>
+<script type="math/tex; mode=display">
+F(x)G(x)
+=
+\sum _i 
+    \left(
+    \sum _{j=0} ^{i}
+        a_j b_{i-j}
+    \right)
+    x^i</script><p>所以 $ \langle \sum\limits _{i=0} ^n a_i b _{n-i} \rangle $ 的生成函数就是 $ F(x)G(x) $</p>
+<h4 id="封闭形式"><a href="#封闭形式" class="headerlink" title="封闭形式"></a>封闭形式</h4><p>形式幂级数的形式无法快速进行乘法运算，所以需要转化为封闭形式简化运算。</p>
+<p>例如 $ \langle 1,1, \cdots \rangle $ 的普通生成函数为 $ F(x) = \sum _i x^i $ 。</p>
+<p>可以发现 $ F(x) = xF(x) + 1 $ ，解方程得到 $ F(x) = \large\frac{1}{1-x} $。</p>
+<p>这就是函数 $ F(x) = \sum _i x^i $ 的封闭形式。</p>
+<p>等比数列 $ \langle 1, p, p^2, p^3, \cdots \rangle $ 的生成函数 $ F(x) = \sum _i p^i x^i $， 有</p>
+<script type="math/tex; mode=display">\begin{aligned}
+& F(x) = pxF(x)+1
+
+\\
+
+& F(x) = \frac{1}{1-px}
+
+\end{aligned}</script><p>等比数列的封闭形式与展开形式之间的转化是常用的化简方法。</p>
+<h4 id="牛顿二项式定理"><a href="#牛顿二项式定理" class="headerlink" title="牛顿二项式定理"></a>牛顿二项式定理</h4><p>重新定义组合数: </p>
+<script type="math/tex; mode=display">
+C_n^m 
+= 
+\frac{n^{\underline{m}}}{m!}
+\quad
+(n \in \mathbf{C}, k \in \mathbf{n})</script><p>在这种情况下，对于 $ a \in \mathbf{C} $ ，二项式定理为</p>
+<script type="math/tex; mode=display">
+(x+1)^a
+=
+\sum _{i \ge 0}
+    C_a^i \space x^i</script><p>这样我们就可以通过牛顿二项式定理由封闭形式求某一项的系数了。</p>
+<h3 id="指数型生成函数（EGF"><a href="#指数型生成函数（EGF" class="headerlink" title="指数型生成函数（EGF)"></a>指数型生成函数（EGF)</h3><p>序列 $ a $ 的指数生成函数定义为形式幂级数:</p>
+<script type="math/tex; mode=display">
+\hat F(x)
+=
+\sum _i
+    a_i
+    \frac{x^i}{i!}</script><h4 id="基本运算-1"><a href="#基本运算-1" class="headerlink" title="基本运算"></a>基本运算</h4><p>加减法还是一样，就是系数相加。</p>
+<p>乘法不太一样，对于两个序列 $ a,b $ ，设它们的指数生成函数分别为 $ \hat F(x) \hat G(x) $ ，则</p>
+<script type="math/tex; mode=display">\begin{aligned}
+F(x)G(x) 
+& =
+\sum _{i \ge 0}
+    a_i
+    \frac{x^i}{i!}
+\sum _{j \ge 0}
+    b_j
+    \frac{x^j}{j!}
+
+\\
+
+& =
+\sum _{n \ge 0}
+    i^n
+    \sum _{j=0} ^n
+        a_i b_{n-i}
+        \frac{1}{i!(n-i)!}
+
+\\
+
+& =
+\sum _{n \ge 0}
+    \frac{x^n}{n!}
+    \sum _{i=0} ^n
+        C_n^i
+        a_i b_{n-i}
+\end{aligned}</script><p>所以序列 $ \langle \sum _{i=0} ^{n} C_n^i a_i b_{n-i} \rangle $ 的指数生成函数为 $ \hat F(x) \hat G(x) $。</p>
+<h4 id="封闭形式-1"><a href="#封闭形式-1" class="headerlink" title="封闭形式"></a>封闭形式</h4><p>同样考虑封闭形式简化运算。</p>
+<p>序列 $ \langle 1, 1, \cdots \rangle $ 的指数生成函数是 $ \sum _{n \ge 0} \frac{x^n}{n!} = e^x $。</p>
+<p>类似地，等比数列 $ \langle 1, p, p^2, \cdots \rangle $ 的指数生成函数是 $ \sum _{n \ge 0} \frac{p^n x^n}{n!} = e^{px} $</p>
+<h3 id="狄利克雷生成函数-DGF"><a href="#狄利克雷生成函数-DGF" class="headerlink" title="狄利克雷生成函数(DGF)"></a>狄利克雷生成函数(DGF)</h3>]]></content>
       <categories>
         <category>学习笔记</category>
       </categories>
