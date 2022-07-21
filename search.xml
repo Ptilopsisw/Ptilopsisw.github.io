@@ -90,14 +90,14 @@ ba^B
 <p>因为 $ A,B \le \sqrt{p} $ ，所以时间复杂度就是 $ O(\sqrt{p}) $</p>
 <h3 id="扩展BSGS"><a href="#扩展BSGS" class="headerlink" title="扩展BSGS"></a>扩展BSGS</h3><p>现在 $ a $ 与 $ p $ 不一定互质。</p>
 <p>不互质就硬搞成互质的，设 $ d_1 = \gcd(a,p) $ 。</p>
-<p>如果 $ d_1 \nmid b $ ，则方程无解，否则把方程同时除以 $ d_1 $ ，得到:</p>
+<p>如果 $ d_1 \nmid b $ ，则方程无解，否则把方程同时除以 $ d_1 $ ，得到</p>
 <script type="math/tex; mode=display">
 
 \frac{a}{d_1} \cdot a^{x-1}
 \equiv
 \frac{b}{d_1}
 \pmod{ \frac{p}{d_1} }</script><p>若 $ p $ 和 $ d_1 $ 不互质就再除，直到 $ a \perp \frac{p}{d_1 d_2 \cdots d_k} $。</p>
-<p>记 $ D = \prod _{ i=1 } ^{k} d_i $ ，所以我们得到了:</p>
+<p>记 $ D = \prod _{ i=1 } ^{k} d_i $ ，所以我们得到了</p>
 <script type="math/tex; mode=display">
 \frac{a^k}{D} \cdot a^{x-k}
 \equiv
@@ -105,12 +105,12 @@ ba^B
 \pmod{ \frac{p}{D} }</script><p>因为 $ a \perp \frac{p}{D} $ ，所以 $ a^k \perp \frac{p}{D} $ ，现在就是一个普通的BSGS问题了，求解 $ x-k $ 再加上 $ k $ 即原方程的解。</p>
 <p>不排除解小于等于 $ k $ 的情况，这时候只要 $ O(k) $ 枚举验证一下即可。</p>
 <h2 id="杜教筛"><a href="#杜教筛" class="headerlink" title="杜教筛"></a>杜教筛</h2><p>用来快速求积性函数前缀和。</p>
-<p>设给定的积性函数为 $ f(n) $，所以我们设 $ S(n) $ 为 $ f $ 函数的前缀和:</p>
+<p>设给定的积性函数为 $ f(n) $，所以我们设 $ S(n) $ 为 $ f $ 函数的前缀和</p>
 <script type="math/tex; mode=display">
 S(n) =
     \sum _{i=1} ^{n}
         f(i)</script><p>现在的目标就是求出 $ S(n) $ 的值</p>
-<p>考虑构造一个合适的积性函数 $ g(n) $，然后求他们卷积 $ h(n) $ 的前缀和:</p>
+<p>考虑构造一个合适的积性函数 $ g(n) $，然后求他们卷积 $ h(n) $ 的前缀和</p>
 <script type="math/tex; mode=display">
 \sum _{i=1} ^{n}
     h(i)
@@ -118,7 +118,7 @@ S(n) =
 =
 
 \sum _{i=1} ^{n}
-    (f \ast g)(i)</script><p>由卷积定义得：</p>
+    (f \ast g)(i)</script><p>由卷积定义得</p>
 <script type="math/tex; mode=display">
 \sum _{i=1} ^{n}
     h(i)
@@ -127,7 +127,7 @@ S(n) =
 
 \sum _{i=1} ^{n}
     \sum _{d|i}
-        f(d) g(\frac{i}{d})</script><p>把 $ d $ 和 $ g(\frac{i}{d}) $ 提到前面:</p>
+        f(d) g(\frac{i}{d})</script><p>把 $ d $ 和 $ g(\frac{i}{d}) $ 提到前面</p>
 <script type="math/tex; mode=display">
 \sum _{i=1} ^{n}
     h(i)
@@ -137,7 +137,7 @@ S(n) =
 \sum _{d=1} ^{n}
     g(d)
     \sum _{i=1} ^{\lfloor \frac{n}{d} \rfloor}
-        f(i)</script><p>后面那个求和就是 $ f $ 的前缀和:</p>
+        f(i)</script><p>后面那个求和就是 $ f $ 的前缀和</p>
 <script type="math/tex; mode=display">
 
 \sum _{i=1} ^{n}
@@ -146,7 +146,7 @@ S(n) =
 =
 
 \sum _{d=1} ^{n}
-    g(d) S(\lfloor \frac{n}{d} \rfloor)</script><p>因为我们求解的是 $ S(n) $，所以将 $ d=1 $ 与 $ d&gt;1 $ 分开计算:</p>
+    g(d) S(\lfloor \frac{n}{d} \rfloor)</script><p>因为我们求解的是 $ S(n) $，所以将 $ d=1 $ 与 $ d&gt;1 $ 分开计算</p>
 <script type="math/tex; mode=display">
 
 \sum _{i=1} ^{n}
@@ -157,7 +157,7 @@ S(n) =
 g(1)S(n)
 +
 \sum _{i=2} ^{n}
-    g(d) S(\lfloor \frac{n}{d} \rfloor)</script><p>其中 $ g $ 是积性函数，所以 $ g(1) = 1 $，移项得:</p>
+    g(d) S(\lfloor \frac{n}{d} \rfloor)</script><p>其中 $ g $ 是积性函数，所以 $ g(1) = 1 $，移项得</p>
 <script type="math/tex; mode=display">
 
 S(n)
@@ -171,7 +171,7 @@ S(n)
     g(d) S(\lfloor \frac{n}{d} \rfloor)</script><p>如果我们可以快速求出 $ h(i) $ 的前缀和还有 $ g(n) $ 的函数值，那么问题就可以用整除分块+递归求解了。</p>
 <h3 id="常见的积性函数"><a href="#常见的积性函数" class="headerlink" title="常见的积性函数"></a>常见的积性函数</h3><p>积性函数: $ \operatorname{\varphi} $ , $ \mu $ , $ \sigma $ , $ \operatorname{d} $</p>
 <p>完全积性函数: $ \operatorname{\varepsilon} $ , $ \operatorname{I} $ , $ \operatorname{id} $</p>
-<p>其中:</p>
+<p>其中</p>
 <script type="math/tex; mode=display">\begin{aligned}
 
 & \operatorname{\varepsilon(n)} = [n=1]
@@ -188,7 +188,7 @@ S(n)
 
 & \sigma _k (n) = \sum _{d|n} d^k
 
-\end{aligned}</script><p>一些常用的卷积性质:</p>
+\end{aligned}</script><p>一些常用的卷积性质</p>
 <script type="math/tex; mode=display">\begin{aligned}
 
 & \mu \ast \operatorname{I} = \operatorname{\varepsilon}
@@ -240,7 +240,173 @@ S(n,x+1)
         S(\lfloor \frac{n}{p_x^i} \rfloor, x+1)
     \right)
 
-\right)</script>]]></content>
+\right)</script><h2 id="类欧几里得算法"><a href="#类欧几里得算法" class="headerlink" title="类欧几里得算法"></a>类欧几里得算法</h2><p>用来求一些奇奇怪怪的式子</p>
+<script type="math/tex; mode=display">
+f(a,b,c,n)
+=
+\sum _{i=0} ^{n}
+    \lfloor \frac{ai+b}{c} \rfloor</script><p>无特殊说明，以下数学公式中以 $ \% $ 代替 $ \bmod $。</p>
+<p>分两种情况:</p>
+<ol>
+<li>$ a \ge c \space or \space b \ge c $ 时:</li>
+</ol>
+<script type="math/tex; mode=display">\begin{aligned}
+
+f(a,b,c,n)
+& =
+\sum _{i=0} ^{n}
+    \small\left\lfloor
+    \frac
+    {
+        (\lfloor a/c \rfloor c - a\%c)i
+        +
+        (\lfloor b/c \rfloor c - b\%c)
+    }
+    {c}
+    \right\rfloor
+
+\\
+
+& =
+\sum _{i=0} ^{n}
+\left(
+    \lfloor a/c \rfloor i
+    +
+    \lfloor b/c \rfloor
+\right)
++
+\sum _{i=0} ^{n}
+    \left\lfloor
+    \frac{ (a\%c)i + (b\%c) }{c}
+    \right\rfloor
+
+\\
+
+& =
+\frac{(n+1)(n+2)}{2}  \lfloor a/c \rfloor 
++
+(n+1) \lfloor b/c \rfloor
++
+f(a\%c, b\%c, c, n)
+
+
+\end{aligned}</script><p>这样我们就能把 $ a $ 和 $ b $ 缩小范围了。</p>
+<ol>
+<li>$ a &lt; c \space and \space b &lt; c $ 时:</li>
+</ol>
+<script type="math/tex; mode=display">\begin{aligned}
+f(a,b,c,n)
+& =
+\sum _{i=0} ^{n}
+    \sum _{j=0} ^{ \lfloor \frac{ai+b}{c} \rfloor } 1
+
+\\
+
+& =
+\sum _{i=0} ^{n}
+    \sum _{j=0} ^{\frac{an+b}{c}}
+    \left[
+        j < \lfloor \frac{ai+b}{c} \rfloor
+    \right]
+
+\\
+
+\end{aligned}</script><p>记 $ m = \lfloor \frac{an+b}{c} \rfloor $， 所以有</p>
+<script type="math/tex; mode=display">\begin{aligned}
+f(a,b,c,d)
+& =
+\sum _{i=0} ^{n}
+    \sum _{j=0} ^{m-1}
+    \left[
+        j+1 \le \frac{ai+b}{c}
+    \right]
+
+\\
+
+& =
+\sum _{i=0} ^{n}
+    \sum _{j=0} ^{m-1}
+    \left[
+        \frac{cj+c-b}{a}
+        \le
+        i
+    \right]
+
+\\
+
+& = 
+\sum _{i=0} ^{n}
+    \sum _{j=0} ^{m-1}
+    \left[
+        \frac{cj+c-b-1}{a}
+        <
+        i
+    \right]
+
+\\
+
+& =
+\sum _{j=0} ^{m-1}
+    \sum _{i=0} ^{n}
+    \left[
+        i
+        >
+        \frac{cj+c-b-1}{a}
+    \right]
+
+\\
+
+& =
+\sum _{j=0} ^{m-1}
+    n
+    -
+    \left\lfloor
+    \frac{cj+c-b-1}{a}
+    \right\rfloor
+
+\\
+
+& =
+mn
+-
+\sum _{i=0} ^{m-1}
+    \left\lfloor
+    \frac{cj+c-b-1}{a}
+    \right\rfloor
+
+\\
+
+& =
+mn
+-
+f(c,c-b-1,a,n)
+
+\end{aligned}</script><p>所以我们得到了 $ f $ 的递归解法，递归过程就像是欧几里得算法求 $ \gcd $ 一样，所以是类欧几里得算法</p>
+<script type="math/tex; mode=display">\begin{aligned}
+
+f(a,b,c,n)
+=
+\begin{cases}
+
+    \frac{n(n+1)}{2}   \lfloor a/c \rfloor
+    +
+    n  \lfloor b/c \rfloor
+    +
+    f(a\%c, b\%c, c, n)
+    & , a \ge c \space or \space b \ge c
+
+    \\
+
+    mn
+    -
+    f(c,c-b-1,a,m-1)
+    & , a < c \space and \space b < c
+
+\end{cases}
+
+\end{aligned}</script><h2 id="生成函数"><a href="#生成函数" class="headerlink" title="生成函数"></a>生成函数</h2><h3 id="普通生成函数-OGF"><a href="#普通生成函数-OGF" class="headerlink" title="普通生成函数(OGF)"></a>普通生成函数(OGF)</h3><p>对于一个数列 $ a $ ，它的普通生成函数 $ F(x) = \sum _{i} a_i x^i $</p>
+<p>也就是将 $ a $ 中每一项作为多项式的系数。</p>
+<h4 id="基本运算"><a href="#基本运算" class="headerlink" title="基本运算"></a>基本运算</h4>]]></content>
       <categories>
         <category>学习笔记</category>
       </categories>
