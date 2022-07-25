@@ -568,6 +568,33 @@ g(a,b,c,d)
     f(c,c-b-1,a,m-1)
 \right)
 
+\end{aligned}</script><p>所以</p>
+<script type="math/tex; mode=display">\begin{aligned}
+
+g(a,b,c,n)
+=
+\begin{cases}
+
+\frac{n(n+1)(2n+1)}{6} \lfloor a/c \rfloor
++
+\frac{n(n+1)}{2} \lfloor b/c \rfloor
++
+g(a\%c, b\%c, c, n)
+& , a > c \space or \space b > c
+
+\\
+
+\frac{1}{2}
+\left(
+    n(n+1)m
+    -
+    h(c,c-b-1,a,m-1)
+    -
+    f(c,c-b-1,a,m-1)
+\right)
+& , a < c \space and \space b < c
+
+\end{cases}
 \end{aligned}</script><h3 id="函数-h-a-b-c-n"><a href="#函数-h-a-b-c-n" class="headerlink" title="函数 h(a,b,c,n)"></a>函数 h(a,b,c,n)</h3><p>仍然分两种情况:</p>
 <p>当 $ a &gt; c \space or \space b &gt; c $ 时:</p>
 <script type="math/tex; mode=display">\begin{aligned}
