@@ -78,9 +78,7 @@
   <entry>
     <title>数论学习笔记</title>
     <url>/2022/07/19/%E6%95%B0%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="数论学习笔记"><a href="#数论学习笔记" class="headerlink" title="数论学习笔记"></a>数论学习笔记</h1><p>记录一些我所热爱的<del>生活</del>数论</p>
-<span id="more"></span>
-<h2 id="BSGS"><a href="#BSGS" class="headerlink" title="BSGS"></a>BSGS</h2><h3 id="普通BSGS"><a href="#普通BSGS" class="headerlink" title="普通BSGS"></a>普通BSGS</h3><p>求解 $ a^x \equiv b \pmod p $ ，其中 $ a \perp p $ 。</p>
+    <content><![CDATA[<h1 id="数论学习笔记"><a href="#数论学习笔记" class="headerlink" title="数论学习笔记"></a>数论学习笔记</h1><h2 id="BSGS"><a href="#BSGS" class="headerlink" title="BSGS"></a>BSGS</h2><h3 id="普通BSGS"><a href="#普通BSGS" class="headerlink" title="普通BSGS"></a>普通BSGS</h3><p>求解 $ a^x \equiv b \pmod p $ ，其中 $ a \perp p $ 。</p>
 <p>方程的解满足 $ 0 \le x &lt; p $ 。</p>
 <p>令 $ x = A \lceil \sqrt{p} \rceil - B$ ，其中 $ 0 \le A,B \le \lceil \sqrt{p} \rceil $ ，所以</p>
 <script type="math/tex; mode=display">
