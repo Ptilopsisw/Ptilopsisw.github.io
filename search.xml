@@ -78,7 +78,9 @@
   <entry>
     <title>数论学习笔记</title>
     <url>/2022/07/19/%E6%95%B0%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="数论学习笔记"><a href="#数论学习笔记" class="headerlink" title="数论学习笔记"></a>数论学习笔记</h1><h2 id="BSGS"><a href="#BSGS" class="headerlink" title="BSGS"></a>BSGS</h2><h3 id="普通BSGS"><a href="#普通BSGS" class="headerlink" title="普通BSGS"></a>普通BSGS</h3><p>求解 $ a^x \equiv b \pmod p $ ，其中 $ a \perp p $ 。</p>
+    <content><![CDATA[<h1 id="数论学习笔记"><a href="#数论学习笔记" class="headerlink" title="数论学习笔记"></a>数论学习笔记</h1><p>记录一些我所热爱的<del>生活</del>数论</p>
+<span id="more"></span>
+<h2 id="BSGS"><a href="#BSGS" class="headerlink" title="BSGS"></a>BSGS</h2><h3 id="普通BSGS"><a href="#普通BSGS" class="headerlink" title="普通BSGS"></a>普通BSGS</h3><p>求解 $ a^x \equiv b \pmod p $ ，其中 $ a \perp p $ 。</p>
 <p>方程的解满足 $ 0 \le x &lt; p $ 。</p>
 <p>令 $ x = A \lceil \sqrt{p} \rceil - B$ ，其中 $ 0 \le A,B \le \lceil \sqrt{p} \rceil $ ，所以</p>
 <script type="math/tex; mode=display">
@@ -199,26 +201,21 @@ S(n)
 
 \end{aligned}</script><h2 id="Min-25筛"><a href="#Min-25筛" class="headerlink" title="Min_25筛"></a>Min_25筛</h2><p>求积性函数 $ f(x) $ 前缀和，其中 $ f(p^k), p \in Prime $ 可快速求出。</p>
 <p>下面式子中设 $ p $ 为一个质数， $ p_x $ 为第 $ x $ 个质数</p>
-<ol>
-<li><p>设完全积性函数 $ g(x) $ ，且 $ g(p) = f(p), p \in Prime $</p>
-</li>
-<li><p>设 $ G(n,x) $ 为 $ [1,n] $ 中质数或最小质因子大于等于 $ p_x $ 的和数的 $ g $ 值的和，所以有递推式:</p>
-</li>
-</ol>
+<p>一、设完全积性函数 $ g(x) $ ，且 $ g(p) = f(p), p \in Prime $</p>
+<p>二、设 $ G(n,x) $ 为 $ [1,n] $ 中质数或最小质因子大于等于 $ p_x $ 的和数的 $ g $ 值的和，所以有递推式:</p>
 <script type="math/tex; mode=display">
+
 G(n,x+1)
 =
 G(n,x)
 -
 g(p_x)
 \left(
-    G(\lfloor \frac{n}{p_x}, x)
+    G(\lfloor \frac{n}{p_x}, x \rfloor)
     -
     \sum _{p \in Prime} ^{p \le p_{x-1}}
         g(p)
-\right)</script><ol>
-<li>设 $ S(n,x) $ 为 $ [1,n] $ 中最小质因子大于等于 $ p_x $ 的合数的 $ f $ 值的和，$ tot $ 为 $ [1,n] $ 中质数的个数，递推式:</li>
-</ol>
+\right)</script><p>三、设 $ S(n,x) $ 为 $ [1,n] $ 中最小质因子大于等于 $ p_x $ 的合数的 $ f $ 值的和，$ tot $ 为 $ [1,n] $ 中质数的个数，递推式:</p>
 <script type="math/tex; mode=display">
 
 S(n,x)
@@ -245,25 +242,25 @@ S(n,x+1)
 & f(a,b,c,n)
 =
 \sum _{i=0} ^n
-    \lfloor \frac{ai+b}{c} \rfloor
+    \left\lfloor \frac{ai+b}{c} \right\rfloor
 
 \\
 
 & g(a,b,c,n)
 =
 \sum _{i=0} ^n
-    \lfloor \frac{ai+b}{c} \rfloor i
+    \left\lfloor \frac{ai+b}{c} \right\rfloor i
 
 \\
 
 & h(a,b,c,n)
 =
 \sum _{i=0} ^n
-    \lfloor \frac{ai+b}{c} \rfloor ^2
+    \left\lfloor \frac{ai+b}{c} \right\rfloor ^2
 
 \end{aligned}</script><p>无特殊说明，以下数学公式中以 $ \% $ 代替 $ \bmod $。</p>
 <h3 id="函数-f-a-b-c-n"><a href="#函数-f-a-b-c-n" class="headerlink" title="函数 f(a,b,c,n)"></a>函数 f(a,b,c,n)</h3><p>分两种情况:</p>
-<p>$ a \ge c \space or \space b \ge c $ 时:</p>
+<p>当 $ a \ge c \space or \space b \ge c $ 时:</p>
 <script type="math/tex; mode=display">\begin{aligned}
 
 f(a,b,c,n)
@@ -305,7 +302,7 @@ f(a\%c, b\%c, c, n)
 
 
 \end{aligned}</script><p>这样我们就能把 $ a $ 和 $ b $ 缩小范围了。</p>
-<p>$ a &lt; c \space and \space b &lt; c $ 时:</p>
+<p>当 $ a &lt; c \space and \space b &lt; c $ 时:</p>
 <script type="math/tex; mode=display">\begin{aligned}
 f(a,b,c,n)
 & =
@@ -316,9 +313,9 @@ f(a,b,c,n)
 
 & =
 \sum _{i=0} ^{n}
-    \sum _{j=0} ^{\frac{an+b}{c}}
+    \sum _{j=0} ^{ \lfloor \frac{an+b}{c} \rfloor }
     \left[
-        j < \lfloor \frac{ai+b}{c} \rfloor
+        j < \left\lfloor \frac{ai+b}{c} \right\rfloor
     \right]
 
 \\
@@ -417,7 +414,483 @@ f(a,b,c,n)
 
 \end{cases}
 
-\end{aligned}</script><h3 id="函数-g-a-b-c-n"><a href="#函数-g-a-b-c-n" class="headerlink" title="函数 g(a,b,c,n)"></a>函数 g(a,b,c,n)</h3><h2 id="生成函数"><a href="#生成函数" class="headerlink" title="生成函数"></a>生成函数</h2><h3 id="普通生成函数-OGF"><a href="#普通生成函数-OGF" class="headerlink" title="普通生成函数(OGF)"></a>普通生成函数(OGF)</h3><p>对于一个序列 $ a $ ，它的普通生成函数定义为形式幂级数: $ F(x) = \sum _{i} a_i x^i $</p>
+\end{aligned}</script><h3 id="函数-g-a-b-c-n"><a href="#函数-g-a-b-c-n" class="headerlink" title="函数 g(a,b,c,n)"></a>函数 g(a,b,c,n)</h3><p>还是相同的分情况方法:</p>
+<p>当 $ a &gt; c \space or \space b &gt; c $ 时:</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+
+g(a,b,c,n)
+& =
+\sum _{i=0} ^n
+    \left\lfloor
+    \frac{
+        (\lfloor a/c \rfloor c + a\%c)i
+        +
+        (\lfloor b/c \rfloor c + b\%c)
+    }{c}
+    \right\rfloor
+    i
+\\
+
+& =
+\sum _{i=0} ^n
+    \lfloor a/c \rfloor
+    i^2
++
+\sum _{i=0} ^n
+    \lfloor b/c \rfloor
+    i
++
+\sum _{i=0} ^n
+    \left\lfloor
+        \frac{(a\%c)i + b\%c}{c} 
+    \right\rfloor
+    i
+
+\\
+& =
+\frac{n(n+1)(2n+1)}{6} \lfloor a/c \rfloor
++
+\frac{n(n+1)}{2} \lfloor b/c \rfloor
++
+g(a\%c, b\%c, c, n)
+
+\end{aligned}</script><p>当 $ a&lt;c \space and \space b&lt;c $ 时:</p>
+<script type="math/tex; mode=display">\begin{aligned}
+
+g(a,b,c,d)
+& =
+\sum _{i=0} ^n
+    i
+    \sum _{j=0} ^m
+    \left[
+        j < \lfloor \frac{ai+b}{c} \rfloor
+    \right]
+
+\\
+
+& =
+\sum _{i=0} ^n
+    i
+    \sum _{j=0} ^{m-1}
+    \left[
+        j+1
+        \le
+        \frac{ai+b}{c}
+    \right]
+
+\\
+
+& =
+\sum _{i=0} ^n
+    i
+    \sum _{j=0} ^{m-1}
+    \left[
+        \frac{cj+c-b}{a}
+        \le
+        i
+    \right]
+
+\\
+
+& =
+\sum _{i=0} ^n
+    i
+    \sum _{j=0} ^{m-1}
+    \left[
+        \left\lfloor
+        \frac{cj+c-b-1}{a}
+        \right\rfloor 
+        <
+        i
+    \right]
+
+\end{aligned}</script><p>设 $ A = \lfloor \frac{cj+c-b-1}{a} \rfloor $ ，则</p>
+<script type="math/tex; mode=display">\begin{aligned}
+
+g(a,b,c,d)
+& =
+\sum _{i=0} ^n
+    i
+    \sum _{j=0} ^{m-1}
+        [ i > A ]
+
+\\
+
+& =
+\sum _{j=0} ^{m-1}
+    \sum _{i=0} ^n
+    i [i > A]
+
+\\
+
+& =
+\sum _{j=0} ^{m-1}
+    \sum _{i=A+1} ^{n}
+
+\\
+
+& =
+\frac{1}{2}
+\sum _{j=0} ^{m-1}
+    (n+A+1)(n-A)
+
+\\
+
+& = 
+\frac{1}{2}
+\sum _{j=0} ^{m-1}
+    (n^2 + n - A^2 - A)
+
+\\
+
+& =
+\frac{1}{2}
+\left(
+    n^2 m
+    +
+    nm
+    -
+    \sum _{j=0} ^{m-1}
+        \left\lfloor \frac{cj+c-b-1}{a} \right\rfloor ^2
+    -
+    \sum _{j=0} ^{m-1}
+        \left\lfloor \frac{cj+c-b-1}{a} \right\rfloor
+\right)
+
+\\
+
+& =
+\frac{1}{2}
+\left(
+    n(n+1)m
+    -
+    h(c,c-b-1,a,m-1)
+    -
+    f(c,c-b-1,a,m-1)
+\right)
+
+\end{aligned}</script><h3 id="函数-h-a-b-c-n"><a href="#函数-h-a-b-c-n" class="headerlink" title="函数 h(a,b,c,n)"></a>函数 h(a,b,c,n)</h3><p>仍然分两种情况:</p>
+<p>当 $ a &gt; c \space or \space b &gt; c $ 时:</p>
+<script type="math/tex; mode=display">\begin{aligned}
+
+h(a,b,c,n)
+& =
+\sum _{i=0} ^n
+\left\lfloor
+    \frac{ai+b}{c}
+\right\rfloor ^2
+
+\\
+
+& =
+\sum _{i=0} ^n
+\left\lfloor
+    \frac{\lfloor a/c \rfloor ci + \lfloor b/c \rfloor c }{c}
+    +
+    \frac{(a\%c)i + (b\%c)}{c}
+\right\rfloor ^2
+
+\\
+
+& =
+\sum _{i=0} ^n
+\left(
+    \lfloor a/c \rfloor i + \lfloor b/c \rfloor
+    +
+    \left\lfloor
+        \frac{(a\%c)i + (b\%c)}{c}
+    \right\rfloor
+\right) ^2
+
+\end{aligned}</script><p>设 $ A = \lfloor a/c \rfloor i + \lfloor b/c \rfloor $ , $ B = \left\lfloor \frac{(a\%c)i + (b\%c)}{c} \right\rfloor $， 所以</p>
+<script type="math/tex; mode=display">\begin{aligned}
+h(a,b,c,n)
+& =
+\sum _{i=0} ^n
+\left(
+    A+B
+\right) ^2
+
+\\
+
+& =
+\sum _{i=0} ^n
+\left(
+    A^2 + 2AB + B^2
+\right)
+
+\\
+
+& = 
+\sum _{i=0} ^n
+    A^2
++
+2 \sum _{i=0} ^n
+    AB
++
+\sum _{i=0} ^n
+    B^2
+
+\\
+
+\sum _{i=0} ^n
+    A^2
+
+& =
+\sum _{i=0} ^{n}
+\left(
+    \lfloor a/c \rfloor i
+    +
+    \lfloor b/c \rfloor
+\right) ^2
+
+\\
+
+& =
+\sum _{i=0} ^n
+    \lfloor a/c \rfloor ^2
+    i^2
++
+2 \sum _{i=0} ^n
+    \lfloor a/c \rfloor
+    \lfloor b/c \rfloor
+    i
++
+\sum _{i=0} ^n
+    \lfloor b/c \rfloor ^2
+
+\\
+
+& =
+\frac{n(n+1)(2n+1)}{6}
+\lfloor a/c \rfloor ^2
++
+n(n+1)
+\lfloor a/c \rfloor \lfloor b/c \rfloor
++
+(n+1) \lfloor b/c \rfloor ^2
+
+\\
+
+2 \sum _{i=0} ^n
+    AB
+& =
+2 \sum _{i=0} ^n
+\left(
+    \lfloor a/c \rfloor i
+    +
+    \lfloor b/c \rfloor
+\right)
+\left\lfloor
+    \frac{(a\%c)i + (b\%c)}{c}
+\right\rfloor
+
+\\
+
+& =
+2 \sum _{i=0} ^n
+    \lfloor a/c \rfloor i
+    \left\lfloor
+        \frac{(a\%c)i+(b\%c)}{c}
+    \right\rfloor
++
+2 \sum _{i=0} ^n
+    \lfloor b/c \rfloor
+    \left\lfloor
+        \frac{(a\%c)i+(b\%c)}{c}
+    \right\rfloor
+
+\\
+
+& =
+2 \lfloor a/c \rfloor
+g(a\%c, b\%c, c, n)
++
+2 \lfloor b/c \rfloor
+f(a\%c, b\%c, c, n)
+
+\\
+
+\sum _{i=0} ^n
+    B^2
+& =
+h(a\%c, b\%c, c, n)
+
+\\
+
+h(a,b,c,n)
+& =
+\frac{n(n+1)(2n+1)}{6} \lfloor a/c \rfloor ^2
++
+n(n+1) \lfloor a/c \rfloor \lfloor b/c \rfloor
++
+(n+1) \lfloor b/c \rfloor ^2
++
+2 \lfloor a/c \rfloor g(a\%c, b\%c, c, n)
++
+2 \lfloor b/c \rfloor f(a\%c, b\%c, c, n)
++
+h(a\%c, b\%c, c, n)
+
+\end{aligned}</script><p>当 $ a &lt; c \space and \space b &lt; c $ 时:</p>
+<script type="math/tex; mode=display">\begin{aligned}
+
+h(a,b,c,n)
+& =
+\sum _{i=0} ^n
+\left\lfloor
+    \frac{ai+b}{c}
+\right\rfloor ^2
+
+\\
+
+& =
+\sum _{i=0} ^n
+\left(
+    2 \sum _{j=1} ^{ \lfloor \frac{ai+b}{c} \rfloor }
+        j
+    +
+    \left\lfloor \frac{ai+b}{c} \right\rfloor
+\right)
+
+\\
+
+& =
+2 \sum _{i=0} ^n
+    \sum _{j=1} ^{ \lfloor \frac{ai+b}{c} \rfloor }
+        j
++
+\sum _{i=0} ^n
+    \left\lfloor \frac{ai+b}{c} \right\rfloor
+
+\\
+
+& =
+2 \sum _{i=0} ^n
+    \sum _{j=0} ^{m-1}
+        (j+1)
+        \left[
+            j
+            <
+            \left\lfloor
+                \frac{ai+b}{c}
+            \right\rfloor
+        \right]
+-
+f(a,b,c,n)
+
+\\
+
+& = 
+2 \sum _{i=0} ^n
+    \sum _{j=0} ^{m-1}
+        (j+1)
+        \left[
+            \left\lfloor
+                \frac{cj+c-b-1}{a}
+            \right\rfloor
+            <
+            i
+        \right]
+-
+f(a,b,c,n)
+
+\\
+
+& = 
+2 \sum _{j=0} ^{m-1}
+    (j+1)
+    \sum _{i=0} ^n
+        \left[
+            i
+            >
+            \left\lfloor
+                \frac{cj+c-b-1}{a}
+            \right\rfloor
+        \right]
+-
+f(a,b,c,n)
+
+\\
+
+& =
+2 \sum _{j=0} ^{m-1}
+    (j+1)
+    \left(
+        n
+        -
+        \left\lfloor
+            \frac{cj+c-b-1}{a}
+        \right\rfloor
+    \right)
+-
+f(a,b,c,n)
+
+\\
+
+& =
+2n \sum _{j=0} ^{m-1}
+    (j+1)
+-
+2 \sum _{j=0} ^{m-1}
+    j
+    \left\lfloor
+        \frac{cj+c-b-1}{a}
+    \right\rfloor
+-
+2 \sum _{j=0} ^{m-1}
+    \left\lfloor
+        \frac{cj+c-b-1}{a}
+    \right\rfloor
+-
+f(a,b,c,n)
+
+
+\\
+
+& =
+nm(m+1)
+-
+2g(c, c-b-1, a, n)
+-
+2f(c, c-b-1, a, n)
+-
+f(a, b, c, n)
+
+\end{aligned}</script><p>所以</p>
+<script type="math/tex; mode=display">\begin{aligned}
+
+h(a,b,c,n)
+=
+\begin{cases}
+
+\frac{n(n+1)(2n+1)}{6} \lfloor a/c \rfloor ^2
++
+n(n+1) \lfloor a/c \rfloor \lfloor b/c \rfloor
++
+(n+1) \lfloor b/c \rfloor ^2
++
+2 \lfloor a/c \rfloor g(a\%c, b\%c, c, n)
++
+2 \lfloor b/c \rfloor f(a\%c, b\%c, c, n)
++
+h(a\%c, b\%c, c, n)
+& , a > c \space or \space b > c
+
+\\
+
+nm(m+1)
+-
+2g(c, c-b-1, a, n)
+-
+2f(c, c-b-1, a, n)
+-
+f(a, b, c, n)
+& , a < c \space and \space b < c
+\end{cases}
+
+\end{aligned}</script><h2 id="生成函数"><a href="#生成函数" class="headerlink" title="生成函数"></a>生成函数</h2><h3 id="普通生成函数-OGF"><a href="#普通生成函数-OGF" class="headerlink" title="普通生成函数(OGF)"></a>普通生成函数(OGF)</h3><p>对于一个序列 $ a $ ，它的普通生成函数定义为形式幂级数: $ F(x) = \sum _{i} a_i x^i $</p>
 <p>也就是将 $ a $ 中每一项作为多项式的系数。</p>
 <h4 id="基本运算"><a href="#基本运算" class="headerlink" title="基本运算"></a>基本运算</h4><p>设两个序列 $ a,b $ 的生成函数分别为 $ F(x), G(x) $ ，则有</p>
 <script type="math/tex; mode=display">
@@ -630,7 +1103,7 @@ F(x)G(x)
 <p><a href="https://www.luogu.com.cn/training/172988">题单链接</a></p>
 <p>经典的网络流24题，有些题还是很不错的</p>
 <p><a href="https://www.luogu.com.cn/problem/list?tag=332&amp;page=1&amp;orderBy=difficulty&amp;order=asc">网络流24题</a></p>
-<h1 id="引用的一些资料"><a href="#引用的一些资料" class="headerlink" title="引用的一些资料"></a>引用的一些资料</h1><p><a href="https://www.cnblogs.com/victorique/p/8560656.html">网络流建模</a><br>w</p>
+<h1 id="引用的一些资料"><a href="#引用的一些资料" class="headerlink" title="引用的一些资料"></a>引用的一些资料</h1><p><a href="https://www.cnblogs.com/victorique/p/8560656.html">网络流建模</a></p>
 ]]></content>
       <categories>
         <category>课件</category>
