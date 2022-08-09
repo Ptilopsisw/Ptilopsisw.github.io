@@ -1,0 +1,1154 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>数论学习笔记 | Ptilopsis_w's little blog</title><meta name="author" content="Ptilopsis_w"><meta name="copyright" content="Ptilopsis_w"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="数论学习笔记BSGS普通BSGS求解 $ a^x \equiv b \pmod p $ ，其中 $ a \perp p $ 。 方程的解满足 $ 0 \le x &lt; p $ 。 令 $ x &#x3D; A \lceil \sqrt{p} \rceil - B$ ，其中 $ 0 \le A,B \le \lceil \sqrt{p} \rceil $ ，所以   a^{A \lceil \sqrt{p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数论学习笔记">
+<meta property="og:url" content="http://example.com/2022/08/09/%E6%95%B0%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Ptilopsis_w&#39;s little blog">
+<meta property="og:description" content="数论学习笔记BSGS普通BSGS求解 $ a^x \equiv b \pmod p $ ，其中 $ a \perp p $ 。 方程的解满足 $ 0 \le x &lt; p $ 。 令 $ x &#x3D; A \lceil \sqrt{p} \rceil - B$ ，其中 $ 0 \le A,B \le \lceil \sqrt{p} \rceil $ ，所以   a^{A \lceil \sqrt{p">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s1.328888.xyz/2022/07/19/l2G1w.jpg">
+<meta property="article:published_time" content="2022-08-09T08:57:27.336Z">
+<meta property="article:modified_time" content="2022-08-09T08:57:31.150Z">
+<meta property="article:author" content="Ptilopsis_w">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.328888.xyz/2022/07/19/l2G1w.jpg"><link rel="shortcut icon" href="https://s1.328888.xyz/2022/06/09/zxPy7.jpg"><link rel="canonical" href="http://example.com/2022/08/09/%E6%95%B0%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '数论学习笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-08-09 16:57:31'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s1.328888.xyz/2022/08/03/OWtcw.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s1.328888.xyz/2022/07/19/l2G1w.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Ptilopsis_w's little blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">数论学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-09T08:57:27.336Z" title="发表于 2022-08-09 16:57:27">2022-08-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-09T08:57:31.150Z" title="更新于 2022-08-09 16:57:31">2022-08-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="数论学习笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2022/08/09/%E6%95%B0%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#post-comment"><span class="gitalk-comment-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="数论学习笔记"><a href="#数论学习笔记" class="headerlink" title="数论学习笔记"></a>数论学习笔记</h1><h2 id="BSGS"><a href="#BSGS" class="headerlink" title="BSGS"></a>BSGS</h2><h3 id="普通BSGS"><a href="#普通BSGS" class="headerlink" title="普通BSGS"></a>普通BSGS</h3><p>求解 $ a^x \equiv b \pmod p $ ，其中 $ a \perp p $ 。</p>
+<p>方程的解满足 $ 0 \le x &lt; p $ 。</p>
+<p>令 $ x = A \lceil \sqrt{p} \rceil - B$ ，其中 $ 0 \le A,B \le \lceil \sqrt{p} \rceil $ ，所以</p>
+<script type="math/tex; mode=display">
+
+a^{A \lceil \sqrt{p} \rceil}
+\equiv
+ba^B
+\pmod{ p }</script><p>可以先算出等式右边 $ ba^B $ 的所有取值，将其存到一个 hash 表里。<br>然后计算 $ a^{A \lceil \sqrt{p} \rceil} $ 并查表寻找是否有相等值，即可得到 $ x $ 。</p>
+<p>因为 $ A,B \le \sqrt{p} $ ，所以时间复杂度就是 $ O(\sqrt{p}) $</p>
+<h3 id="扩展BSGS"><a href="#扩展BSGS" class="headerlink" title="扩展BSGS"></a>扩展BSGS</h3><p>现在 $ a $ 与 $ p $ 不一定互质。</p>
+<p>不互质就硬搞成互质的，设 $ d_1 = \gcd(a,p) $ 。</p>
+<p>如果 $ d_1 \nmid b $ ，则方程无解，否则把方程同时除以 $ d_1 $ ，得到</p>
+<script type="math/tex; mode=display">
+
+\frac{a}{d_1} \cdot a^{x-1}
+\equiv
+\frac{b}{d_1}
+\pmod{ \frac{p}{d_1} }</script><p>若 $ p $ 和 $ d_1 $ 不互质就再除，直到 $ a \perp \frac{p}{d_1 d_2 \cdots d_k} $。</p>
+<p>记 $ D = \prod _{ i=1 } ^{k} d_i $ ，所以我们得到了</p>
+<script type="math/tex; mode=display">
+\frac{a^k}{D} \cdot a^{x-k}
+\equiv
+\frac{b}{D}
+\pmod{ \frac{p}{D} }</script><p>因为 $ a \perp \frac{p}{D} $ ，所以 $ a^k \perp \frac{p}{D} $ ，现在就是一个普通的BSGS问题了，求解 $ x-k $ 再加上 $ k $ 即原方程的解。</p>
+<p>不排除解小于等于 $ k $ 的情况，这时候只要 $ O(k) $ 枚举验证一下即可。</p>
+<h2 id="杜教筛"><a href="#杜教筛" class="headerlink" title="杜教筛"></a>杜教筛</h2><p>用来快速求积性函数前缀和。</p>
+<p>设给定的积性函数为 $ f(n) $，所以我们设 $ S(n) $ 为 $ f $ 函数的前缀和</p>
+<script type="math/tex; mode=display">
+S(n) =
+    \sum _{i=1} ^{n}
+        f(i)</script><p>现在的目标就是求出 $ S(n) $ 的值</p>
+<p>考虑构造一个合适的积性函数 $ g(n) $，然后求他们卷积 $ h(n) $ 的前缀和</p>
+<script type="math/tex; mode=display">
+\sum _{i=1} ^{n}
+    h(i)
+
+=
+
+\sum _{i=1} ^{n}
+    (f \ast g)(i)</script><p>由卷积定义得</p>
+<script type="math/tex; mode=display">
+\sum _{i=1} ^{n}
+    h(i)
+
+=
+
+\sum _{i=1} ^{n}
+    \sum _{d|i}
+        f(\frac{i}{d}) g(d)</script><p>把 $ d $ 和 $ g(d) $ 提到前面</p>
+<script type="math/tex; mode=display">
+\sum _{i=1} ^{n}
+    h(i)
+
+=
+
+\sum _{d=1} ^{n}
+    g(d)
+    \sum _{i=1} ^{\lfloor \frac{n}{d} \rfloor}
+        f(i)</script><p>后面那个求和就是 $ f $ 的前缀和</p>
+<script type="math/tex; mode=display">
+
+\sum _{i=1} ^{n}
+    h(i)
+
+=
+
+\sum _{d=1} ^{n}
+    g(d) S(\lfloor \frac{n}{d} \rfloor)</script><p>因为我们求解的是 $ S(n) $，所以将 $ d=1 $ 与 $ d&gt;1 $ 分开计算</p>
+<script type="math/tex; mode=display">
+
+\sum _{i=1} ^{n}
+    h(i)
+
+=
+
+g(1)S(n)
++
+\sum _{d=2} ^{n}
+    g(d) S(\lfloor \frac{n}{d} \rfloor)</script><p>其中 $ g $ 是积性函数，所以 $ g(1) = 1 $，移项得</p>
+<script type="math/tex; mode=display">
+
+S(n)
+
+=
+
+\sum _{i=1} ^{n}
+    h(i)
+-
+\sum _{d=2} ^{n}
+    g(d) S(\lfloor \frac{n}{d} \rfloor)</script><p>如果我们可以快速求出 $ h(i) $ 和 $ g(n) $ 的前缀和，那么问题就可以用整除分块+递归求解了。</p>
+<h3 id="常见的积性函数"><a href="#常见的积性函数" class="headerlink" title="常见的积性函数"></a>常见的积性函数</h3><p>积性函数: $ \operatorname{\varphi} $ , $ \mu $ , $ \sigma $ , $ \operatorname{d} $</p>
+<p>完全积性函数: $ \operatorname{\varepsilon} $ , $ \operatorname{I} $ , $ \operatorname{id} $</p>
+<p>其中</p>
+<script type="math/tex; mode=display">\begin{aligned}
+
+& \operatorname{\varepsilon(n)} = [n=1]
+
+\\
+
+& \operatorname{I}(n) = 1
+
+\\
+
+& \operatorname{id_k}(n) = n^k
+
+\\
+
+& \sigma _k (n) = \sum _{d|n} d^k
+
+\end{aligned}</script><p>一些常用的卷积性质</p>
+<script type="math/tex; mode=display">\begin{aligned}
+
+& \mu \ast \operatorname{I} = \operatorname{\varepsilon}
+\\
+& \operatorname{\varphi} \ast \operatorname{I} = \operatorname{id_1}
+\\
+& \mu \ast \operatorname{id_1} = \operatorname{\varphi}
+
+\end{aligned}</script><h2 id="Min-25筛"><a href="#Min-25筛" class="headerlink" title="Min_25筛"></a>Min_25筛</h2><p>求积性函数 $ f(x) $ 前缀和，其中 $ f(p^k), p \in Prime $ 可快速求出。</p>
+<p>下面式子中设 $ p $ 为一个质数， $ p_x $ 为第 $ x $ 个质数</p>
+<p>一、设完全积性函数 $ g(x) $ ，且 $ g(p) = f(p), p \in Prime $</p>
+<p>二、设 $ G(n,x) $ 为 $ [1,n] $ 中质数或最小质因子大于等于 $ p_x $ 的和数的 $ g $ 值的和，所以有递推式:</p>
+<script type="math/tex; mode=display">
+
+G(n,x+1)
+=
+G(n,x)
+-
+g(p_x)
+\left(
+    G(\lfloor \frac{n}{p_x}, x \rfloor)
+    -
+    \sum _{p \in Prime} ^{p \le p_{x-1}}
+        g(p)
+\right)</script><p>三、设 $ S(n,x) $ 为 $ [1,n] $ 中最小质因子大于等于 $ p_x $ 的合数的 $ f $ 值的和，$ tot $ 为 $ [1,n] $ 中质数的个数，递推式:</p>
+<script type="math/tex; mode=display">
+
+S(n,x)
+=
+S(n,x+1) 
++
+\sum _{i=1} ^{p_x^{i+1} \le n}
+\left(
+    f(p_x^{i+1})
+    +
+    f(p_x^i)
+    \cdot
+    \left(
+        G(\lfloor \frac{n}{p_x^i} \rfloor, tot+1)
+        -
+        \sum _{p \in Prime} ^{p \le p_{x}}
+            f(p)
+        +
+        S(\lfloor \frac{n}{p_x^i} \rfloor, x+1)
+    \right)
+
+\right)</script><h2 id="类欧几里得算法"><a href="#类欧几里得算法" class="headerlink" title="类欧几里得算法"></a>类欧几里得算法</h2><p>用来求一些奇奇怪怪的式子</p>
+<script type="math/tex; mode=display">\begin{aligned}
+& f(a,b,c,n)
+=
+\sum _{i=0} ^n
+    \left\lfloor \frac{ai+b}{c} \right\rfloor
+
+\\
+
+& g(a,b,c,n)
+=
+\sum _{i=0} ^n
+    \left\lfloor \frac{ai+b}{c} \right\rfloor i
+
+\\
+
+& h(a,b,c,n)
+=
+\sum _{i=0} ^n
+    \left\lfloor \frac{ai+b}{c} \right\rfloor ^2
+
+\end{aligned}</script><p>无特殊说明，以下数学公式中以 $ \% $ 代替 $ \bmod $。</p>
+<h3 id="函数-f-a-b-c-n"><a href="#函数-f-a-b-c-n" class="headerlink" title="函数 f(a,b,c,n)"></a>函数 f(a,b,c,n)</h3><p>分两种情况:</p>
+<p>当 $ a \ge c \space or \space b \ge c $ 时:</p>
+<script type="math/tex; mode=display">\begin{aligned}
+
+f(a,b,c,n)
+& =
+\sum _{i=0} ^{n}
+    \small\left\lfloor
+    \frac
+    {
+        (\lfloor a/c \rfloor c - a\%c)i
+        +
+        (\lfloor b/c \rfloor c - b\%c)
+    }
+    {c}
+    \right\rfloor
+
+\\
+
+& =
+\sum _{i=0} ^{n}
+\left(
+    \lfloor a/c \rfloor i
+    +
+    \lfloor b/c \rfloor
+\right)
++
+\sum _{i=0} ^{n}
+    \left\lfloor
+    \frac{ (a\%c)i + (b\%c) }{c}
+    \right\rfloor
+
+\\
+
+& =
+\frac{(n+1)(n+2)}{2}  \lfloor a/c \rfloor 
++
+(n+1) \lfloor b/c \rfloor
++
+f(a\%c, b\%c, c, n)
+
+
+\end{aligned}</script><p>这样我们就能把 $ a $ 和 $ b $ 缩小范围了。</p>
+<p>当 $ a &lt; c \space and \space b &lt; c $ 时:</p>
+<script type="math/tex; mode=display">\begin{aligned}
+f(a,b,c,n)
+& =
+\sum _{i=0} ^{n}
+    \sum _{j=0} ^{ \lfloor \frac{ai+b}{c} \rfloor } 1
+
+\\
+
+& =
+\sum _{i=0} ^{n}
+    \sum _{j=0} ^{ \lfloor \frac{an+b}{c} \rfloor }
+    \left[
+        j < \left\lfloor \frac{ai+b}{c} \right\rfloor
+    \right]
+
+\\
+
+\end{aligned}</script><p>记 $ m = \lfloor \frac{an+b}{c} \rfloor $， 所以有</p>
+<script type="math/tex; mode=display">\begin{aligned}
+f(a,b,c,d)
+& =
+\sum _{i=0} ^{n}
+    \sum _{j=0} ^{m-1}
+    \left[
+        j+1 \le \frac{ai+b}{c}
+    \right]
+
+\\
+
+& =
+\sum _{i=0} ^{n}
+    \sum _{j=0} ^{m-1}
+    \left[
+        \frac{cj+c-b}{a}
+        \le
+        i
+    \right]
+
+\\
+
+& = 
+\sum _{i=0} ^{n}
+    \sum _{j=0} ^{m-1}
+    \left[
+        \frac{cj+c-b-1}{a}
+        <
+        i
+    \right]
+
+\\
+
+& =
+\sum _{j=0} ^{m-1}
+    \sum _{i=0} ^{n}
+    \left[
+        i
+        >
+        \frac{cj+c-b-1}{a}
+    \right]
+
+\\
+
+& =
+\sum _{j=0} ^{m-1}
+\left(
+    n
+    -
+    \left\lfloor
+    \frac{cj+c-b-1}{a}
+    \right\rfloor
+\right) 
+\\
+
+& =
+mn
+-
+\sum _{i=0} ^{m-1}
+    \left\lfloor
+    \frac{cj+c-b-1}{a}
+    \right\rfloor
+
+\\
+
+& =
+mn
+-
+f(c,c-b-1,a,m-1)
+
+\end{aligned}</script><p>所以我们得到了 $ f $ 的递归解法，递归过程就像是欧几里得算法求 $ \gcd $ 一样，所以是类欧几里得算法</p>
+<script type="math/tex; mode=display">\begin{aligned}
+
+f(a,b,c,n)
+=
+\begin{cases}
+
+    \frac{n(n+1)}{2}   \lfloor a/c \rfloor
+    +
+    (n+1)  \lfloor b/c \rfloor
+    +
+    f(a\%c, b\%c, c, n)
+    & , a \ge c \space or \space b \ge c
+
+    \\
+
+    mn
+    -
+    f(c,c-b-1,a,m-1)
+    & , a < c \space and \space b < c
+
+\end{cases}
+
+\end{aligned}</script><h3 id="函数-g-a-b-c-n"><a href="#函数-g-a-b-c-n" class="headerlink" title="函数 g(a,b,c,n)"></a>函数 g(a,b,c,n)</h3><p>还是相同的分情况方法:</p>
+<p>当 $ a &gt; c \space or \space b &gt; c $ 时:</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+
+g(a,b,c,n)
+& =
+\sum _{i=0} ^n
+    \left\lfloor
+    \frac{
+        (\lfloor a/c \rfloor c + a\%c)i
+        +
+        (\lfloor b/c \rfloor c + b\%c)
+    }{c}
+    \right\rfloor
+    i
+\\
+
+& =
+\sum _{i=0} ^n
+    \lfloor a/c \rfloor
+    i^2
++
+\sum _{i=0} ^n
+    \lfloor b/c \rfloor
+    i
++
+\sum _{i=0} ^n
+    \left\lfloor
+        \frac{(a\%c)i + b\%c}{c} 
+    \right\rfloor
+    i
+
+\\
+& =
+\frac{n(n+1)(2n+1)}{6} \lfloor a/c \rfloor
++
+\frac{n(n+1)}{2} \lfloor b/c \rfloor
++
+g(a\%c, b\%c, c, n)
+
+\end{aligned}</script><p>当 $ a&lt;c \space and \space b&lt;c $ 时:</p>
+<script type="math/tex; mode=display">\begin{aligned}
+
+g(a,b,c,d)
+& =
+\sum _{i=0} ^n
+    i
+    \sum _{j=0} ^m
+    \left[
+        j < \lfloor \frac{ai+b}{c} \rfloor
+    \right]
+
+\\
+
+& =
+\sum _{i=0} ^n
+    i
+    \sum _{j=0} ^{m-1}
+    \left[
+        j+1
+        \le
+        \frac{ai+b}{c}
+    \right]
+
+\\
+
+& =
+\sum _{i=0} ^n
+    i
+    \sum _{j=0} ^{m-1}
+    \left[
+        \frac{cj+c-b}{a}
+        \le
+        i
+    \right]
+
+\\
+
+& =
+\sum _{i=0} ^n
+    i
+    \sum _{j=0} ^{m-1}
+    \left[
+        \left\lfloor
+        \frac{cj+c-b-1}{a}
+        \right\rfloor 
+        <
+        i
+    \right]
+
+\end{aligned}</script><p>设 $ A = \lfloor \frac{cj+c-b-1}{a} \rfloor $ ，则</p>
+<script type="math/tex; mode=display">\begin{aligned}
+
+g(a,b,c,d)
+& =
+\sum _{i=0} ^n
+    i
+    \sum _{j=0} ^{m-1}
+        [ i > A ]
+
+\\
+
+& =
+\sum _{j=0} ^{m-1}
+    \sum _{i=0} ^n
+    i [i > A]
+
+\\
+
+& =
+\sum _{j=0} ^{m-1}
+    \sum _{i=A+1} ^{n}
+
+\\
+
+& =
+\frac{1}{2}
+\sum _{j=0} ^{m-1}
+    (n+A+1)(n-A)
+
+\\
+
+& = 
+\frac{1}{2}
+\sum _{j=0} ^{m-1}
+    (n^2 + n - A^2 - A)
+
+\\
+
+& =
+\frac{1}{2}
+\left(
+    n^2 m
+    +
+    nm
+    -
+    \sum _{j=0} ^{m-1}
+        \left\lfloor \frac{cj+c-b-1}{a} \right\rfloor ^2
+    -
+    \sum _{j=0} ^{m-1}
+        \left\lfloor \frac{cj+c-b-1}{a} \right\rfloor
+\right)
+
+\\
+
+& =
+\frac{1}{2}
+\left(
+    n(n+1)m
+    -
+    h(c,c-b-1,a,m-1)
+    -
+    f(c,c-b-1,a,m-1)
+\right)
+
+\end{aligned}</script><p>所以</p>
+<script type="math/tex; mode=display">\begin{aligned}
+
+g(a,b,c,n)
+=
+\begin{cases}
+
+\frac{n(n+1)(2n+1)}{6} \lfloor a/c \rfloor
++
+\frac{n(n+1)}{2} \lfloor b/c \rfloor
++
+g(a\%c, b\%c, c, n)
+& , a > c \space or \space b > c
+
+\\
+
+\frac{1}{2}
+\left(
+    n(n+1)m
+    -
+    h(c,c-b-1,a,m-1)
+    -
+    f(c,c-b-1,a,m-1)
+\right)
+& , a < c \space and \space b < c
+
+\end{cases}
+\end{aligned}</script><h3 id="函数-h-a-b-c-n"><a href="#函数-h-a-b-c-n" class="headerlink" title="函数 h(a,b,c,n)"></a>函数 h(a,b,c,n)</h3><p>仍然分两种情况:</p>
+<p>当 $ a &gt; c \space or \space b &gt; c $ 时:</p>
+<script type="math/tex; mode=display">\begin{aligned}
+
+h(a,b,c,n)
+& =
+\sum _{i=0} ^n
+\left\lfloor
+    \frac{ai+b}{c}
+\right\rfloor ^2
+
+\\
+
+& =
+\sum _{i=0} ^n
+\left\lfloor
+    \frac{\lfloor a/c \rfloor ci + \lfloor b/c \rfloor c }{c}
+    +
+    \frac{(a\%c)i + (b\%c)}{c}
+\right\rfloor ^2
+
+\\
+
+& =
+\sum _{i=0} ^n
+\left(
+    \lfloor a/c \rfloor i + \lfloor b/c \rfloor
+    +
+    \left\lfloor
+        \frac{(a\%c)i + (b\%c)}{c}
+    \right\rfloor
+\right) ^2
+
+\end{aligned}</script><p>设 $ A = \lfloor a/c \rfloor i + \lfloor b/c \rfloor $ , $ B = \left\lfloor \frac{(a\%c)i + (b\%c)}{c} \right\rfloor $， 所以</p>
+<script type="math/tex; mode=display">\begin{aligned}
+h(a,b,c,n)
+& =
+\sum _{i=0} ^n
+\left(
+    A+B
+\right) ^2
+
+\\
+
+& =
+\sum _{i=0} ^n
+\left(
+    A^2 + 2AB + B^2
+\right)
+
+\\
+
+& = 
+\sum _{i=0} ^n
+    A^2
++
+2 \sum _{i=0} ^n
+    AB
++
+\sum _{i=0} ^n
+    B^2
+
+\\
+
+\sum _{i=0} ^n
+    A^2
+
+& =
+\sum _{i=0} ^{n}
+\left(
+    \lfloor a/c \rfloor i
+    +
+    \lfloor b/c \rfloor
+\right) ^2
+
+\\
+
+& =
+\sum _{i=0} ^n
+    \lfloor a/c \rfloor ^2
+    i^2
++
+2 \sum _{i=0} ^n
+    \lfloor a/c \rfloor
+    \lfloor b/c \rfloor
+    i
++
+\sum _{i=0} ^n
+    \lfloor b/c \rfloor ^2
+
+\\
+
+& =
+\frac{n(n+1)(2n+1)}{6}
+\lfloor a/c \rfloor ^2
++
+n(n+1)
+\lfloor a/c \rfloor \lfloor b/c \rfloor
++
+(n+1) \lfloor b/c \rfloor ^2
+
+\\
+
+2 \sum _{i=0} ^n
+    AB
+& =
+2 \sum _{i=0} ^n
+\left(
+    \lfloor a/c \rfloor i
+    +
+    \lfloor b/c \rfloor
+\right)
+\left\lfloor
+    \frac{(a\%c)i + (b\%c)}{c}
+\right\rfloor
+
+\\
+
+& =
+2 \sum _{i=0} ^n
+    \lfloor a/c \rfloor i
+    \left\lfloor
+        \frac{(a\%c)i+(b\%c)}{c}
+    \right\rfloor
++
+2 \sum _{i=0} ^n
+    \lfloor b/c \rfloor
+    \left\lfloor
+        \frac{(a\%c)i+(b\%c)}{c}
+    \right\rfloor
+
+\\
+
+& =
+2 \lfloor a/c \rfloor
+g(a\%c, b\%c, c, n)
++
+2 \lfloor b/c \rfloor
+f(a\%c, b\%c, c, n)
+
+\\
+
+\sum _{i=0} ^n
+    B^2
+& =
+h(a\%c, b\%c, c, n)
+
+\\
+
+h(a,b,c,n)
+& =
+\frac{n(n+1)(2n+1)}{6} \lfloor a/c \rfloor ^2
++
+n(n+1) \lfloor a/c \rfloor \lfloor b/c \rfloor
++
+(n+1) \lfloor b/c \rfloor ^2
++
+2 \lfloor a/c \rfloor g(a\%c, b\%c, c, n)
++
+2 \lfloor b/c \rfloor f(a\%c, b\%c, c, n)
++
+h(a\%c, b\%c, c, n)
+
+\end{aligned}</script><p>当 $ a &lt; c \space and \space b &lt; c $ 时:</p>
+<script type="math/tex; mode=display">\begin{aligned}
+
+h(a,b,c,n)
+& =
+\sum _{i=0} ^n
+\left\lfloor
+    \frac{ai+b}{c}
+\right\rfloor ^2
+
+\\
+
+& =
+\sum _{i=0} ^n
+\left(
+    2 \sum _{j=1} ^{ \lfloor \frac{ai+b}{c} \rfloor }
+        j
+    +
+    \left\lfloor \frac{ai+b}{c} \right\rfloor
+\right)
+
+\\
+
+& =
+2 \sum _{i=0} ^n
+    \sum _{j=1} ^{ \lfloor \frac{ai+b}{c} \rfloor }
+        j
++
+\sum _{i=0} ^n
+    \left\lfloor \frac{ai+b}{c} \right\rfloor
+
+\\
+
+& =
+2 \sum _{i=0} ^n
+    \sum _{j=0} ^{m-1}
+        (j+1)
+        \left[
+            j
+            <
+            \left\lfloor
+                \frac{ai+b}{c}
+            \right\rfloor
+        \right]
+-
+f(a,b,c,n)
+
+\\
+
+& = 
+2 \sum _{i=0} ^n
+    \sum _{j=0} ^{m-1}
+        (j+1)
+        \left[
+            \left\lfloor
+                \frac{cj+c-b-1}{a}
+            \right\rfloor
+            <
+            i
+        \right]
+-
+f(a,b,c,n)
+
+\\
+
+& = 
+2 \sum _{j=0} ^{m-1}
+    (j+1)
+    \sum _{i=0} ^n
+        \left[
+            i
+            >
+            \left\lfloor
+                \frac{cj+c-b-1}{a}
+            \right\rfloor
+        \right]
+-
+f(a,b,c,n)
+
+\\
+
+& =
+2 \sum _{j=0} ^{m-1}
+    (j+1)
+    \left(
+        n
+        -
+        \left\lfloor
+            \frac{cj+c-b-1}{a}
+        \right\rfloor
+    \right)
+-
+f(a,b,c,n)
+
+\\
+
+& =
+2n \sum _{j=0} ^{m-1}
+    (j+1)
+-
+2 \sum _{j=0} ^{m-1}
+    j
+    \left\lfloor
+        \frac{cj+c-b-1}{a}
+    \right\rfloor
+-
+2 \sum _{j=0} ^{m-1}
+    \left\lfloor
+        \frac{cj+c-b-1}{a}
+    \right\rfloor
+-
+f(a,b,c,n)
+
+
+\\
+
+& =
+nm(m+1)
+-
+2g(c, c-b-1, a, n)
+-
+2f(c, c-b-1, a, n)
+-
+f(a, b, c, n)
+
+\end{aligned}</script><p>所以</p>
+<script type="math/tex; mode=display">\begin{aligned}
+
+h(a,b,c,n)
+=
+\begin{cases}
+
+\frac{n(n+1)(2n+1)}{6} \lfloor a/c \rfloor ^2
++
+n(n+1) \lfloor a/c \rfloor \lfloor b/c \rfloor
++
+(n+1) \lfloor b/c \rfloor ^2
++
+2 \lfloor a/c \rfloor g(a\%c, b\%c, c, n)
++
+2 \lfloor b/c \rfloor f(a\%c, b\%c, c, n)
++
+h(a\%c, b\%c, c, n)
+& , a > c \space or \space b > c
+
+\\
+
+nm(m+1)
+-
+2g(c, c-b-1, a, n)
+-
+2f(c, c-b-1, a, n)
+-
+f(a, b, c, n)
+& , a < c \space and \space b < c
+\end{cases}
+
+\end{aligned}</script><h2 id="生成函数"><a href="#生成函数" class="headerlink" title="生成函数"></a>生成函数</h2><h3 id="普通生成函数-OGF"><a href="#普通生成函数-OGF" class="headerlink" title="普通生成函数(OGF)"></a>普通生成函数(OGF)</h3><p>对于一个序列 $ a $ ，它的普通生成函数定义为形式幂级数: $ F(x) = \sum _{i} a_i x^i $</p>
+<p>也就是将 $ a $ 中每一项作为多项式的系数。</p>
+<h4 id="基本运算"><a href="#基本运算" class="headerlink" title="基本运算"></a>基本运算</h4><p>设两个序列 $ a,b $ 的生成函数分别为 $ F(x), G(x) $ ，则有</p>
+<script type="math/tex; mode=display">
+F(x) \pm G(x)
+=
+\sum _{i} (a_i \pm b_i)x^i</script><p>也就是序列 $ \langle a_i \pm b_i \rangle $ 的生成函数为 $ F(x) \pm G(x) $。</p>
+<p>考虑乘法运算，也就是多项式卷积</p>
+<script type="math/tex; mode=display">
+F(x)G(x)
+=
+\sum _i 
+    \left(
+    \sum _{j=0} ^{i}
+        a_j b_{i-j}
+    \right)
+    x^i</script><p>所以 $ \langle \sum\limits _{i=0} ^n a_i b _{n-i} \rangle $ 的生成函数就是 $ F(x)G(x) $</p>
+<h4 id="封闭形式"><a href="#封闭形式" class="headerlink" title="封闭形式"></a>封闭形式</h4><p>形式幂级数的形式无法快速进行乘法运算，所以需要转化为封闭形式简化运算。</p>
+<p>例如 $ \langle 1,1, \cdots \rangle $ 的普通生成函数为 $ F(x) = \sum _i x^i $ 。</p>
+<p>可以发现 $ F(x) = xF(x) + 1 $ ，解方程得到 $ F(x) = \large\frac{1}{1-x} $。</p>
+<p>这就是函数 $ F(x) = \sum _i x^i $ 的封闭形式。</p>
+<p>等比数列 $ \langle 1, p, p^2, p^3, \cdots \rangle $ 的生成函数 $ F(x) = \sum _i p^i x^i $， 有</p>
+<script type="math/tex; mode=display">\begin{aligned}
+& F(x) = pxF(x)+1
+
+\\
+
+& F(x) = \frac{1}{1-px}
+
+\end{aligned}</script><p>等比数列的封闭形式与展开形式之间的转化是常用的化简方法。</p>
+<h4 id="牛顿二项式定理"><a href="#牛顿二项式定理" class="headerlink" title="牛顿二项式定理"></a>牛顿二项式定理</h4><p>重新定义组合数: </p>
+<script type="math/tex; mode=display">
+C_n^m 
+= 
+\frac{n^{\underline{m}}}{m!}
+\quad
+(n \in \mathbf{C}, k \in \mathbf{n})</script><p>在这种情况下，对于 $ a \in \mathbf{C} $ ，二项式定理为</p>
+<script type="math/tex; mode=display">
+(x+1)^a
+=
+\sum _{i \ge 0}
+    C_a^i \space x^i</script><p>这样我们就可以通过牛顿二项式定理由封闭形式求某一项的系数了。</p>
+<h3 id="指数型生成函数（EGF"><a href="#指数型生成函数（EGF" class="headerlink" title="指数型生成函数（EGF)"></a>指数型生成函数（EGF)</h3><p>序列 $ a $ 的指数生成函数定义为形式幂级数:</p>
+<script type="math/tex; mode=display">
+\hat F(x)
+=
+\sum _i
+    a_i
+    \frac{x^i}{i!}</script><h4 id="基本运算-1"><a href="#基本运算-1" class="headerlink" title="基本运算"></a>基本运算</h4><p>加减法还是一样，就是系数相加。</p>
+<p>乘法不太一样，对于两个序列 $ a,b $ ，设它们的指数生成函数分别为 $ \hat F(x) \hat G(x) $ ，则</p>
+<script type="math/tex; mode=display">\begin{aligned}
+F(x)G(x) 
+& =
+\sum _{i \ge 0}
+    a_i
+    \frac{x^i}{i!}
+\sum _{j \ge 0}
+    b_j
+    \frac{x^j}{j!}
+
+\\
+
+& =
+\sum _{n \ge 0}
+    i^n
+    \sum _{j=0} ^n
+        a_i b_{n-i}
+        \frac{1}{i!(n-i)!}
+
+\\
+
+& =
+\sum _{n \ge 0}
+    \frac{x^n}{n!}
+    \sum _{i=0} ^n
+        C_n^i
+        a_i b_{n-i}
+\end{aligned}</script><p>所以序列 $ \langle \sum _{i=0} ^{n} C_n^i a_i b_{n-i} \rangle $ 的指数生成函数为 $ \hat F(x) \hat G(x) $。</p>
+<h4 id="封闭形式-1"><a href="#封闭形式-1" class="headerlink" title="封闭形式"></a>封闭形式</h4><p>同样考虑封闭形式简化运算。</p>
+<p>序列 $ \langle 1, 1, \cdots \rangle $ 的指数生成函数是 $ \sum _{n \ge 0} \frac{x^n}{n!} = e^x $。</p>
+<p>类似地，等比数列 $ \langle 1, p, p^2, \cdots \rangle $ 的指数生成函数是 $ \sum _{n \ge 0} \frac{p^n x^n}{n!} = e^{px} $</p>
+<h3 id="狄利克雷生成函数-DGF"><a href="#狄利克雷生成函数-DGF" class="headerlink" title="狄利克雷生成函数(DGF)"></a>狄利克雷生成函数(DGF)</h3></article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://s1.328888.xyz/2022/07/19/l2G1w.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/08/09/%E7%BD%91%E7%BB%9C%E6%B5%81/"><img class="prev-cover" src="https://s1.328888.xyz/2022/06/07/zhRWk.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">网络流</div></div></a></div><div class="next-post pull-right"><a href="/2022/08/09/%E5%BF%AB%E8%AF%BB%E5%BF%AB%E5%86%99%E6%9D%BF%E5%AD%90/"><img class="next-cover" src="https://s1.328888.xyz/2022/06/09/zB71k.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">快读快写板子</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s1.328888.xyz/2022/08/03/OWtcw.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Ptilopsis_w</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Ptilopsisw"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">查看代码推荐用夜间模式</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">数论学习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#BSGS"><span class="toc-number">1.1.</span> <span class="toc-text">BSGS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%99%AE%E9%80%9ABSGS"><span class="toc-number">1.1.1.</span> <span class="toc-text">普通BSGS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A9%E5%B1%95BSGS"><span class="toc-number">1.1.2.</span> <span class="toc-text">扩展BSGS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%9C%E6%95%99%E7%AD%9B"><span class="toc-number">1.2.</span> <span class="toc-text">杜教筛</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E7%A7%AF%E6%80%A7%E5%87%BD%E6%95%B0"><span class="toc-number">1.2.1.</span> <span class="toc-text">常见的积性函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Min-25%E7%AD%9B"><span class="toc-number">1.3.</span> <span class="toc-text">Min_25筛</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95"><span class="toc-number">1.4.</span> <span class="toc-text">类欧几里得算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0-f-a-b-c-n"><span class="toc-number">1.4.1.</span> <span class="toc-text">函数 f(a,b,c,n)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0-g-a-b-c-n"><span class="toc-number">1.4.2.</span> <span class="toc-text">函数 g(a,b,c,n)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0-h-a-b-c-n"><span class="toc-number">1.4.3.</span> <span class="toc-text">函数 h(a,b,c,n)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.</span> <span class="toc-text">生成函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0-OGF"><span class="toc-number">1.5.1.</span> <span class="toc-text">普通生成函数(OGF)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">基本运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%81%E9%97%AD%E5%BD%A2%E5%BC%8F"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">封闭形式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%9B%E9%A1%BF%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%AE%9A%E7%90%86"><span class="toc-number">1.5.1.3.</span> <span class="toc-text">牛顿二项式定理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E6%95%B0%E5%9E%8B%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%EF%BC%88EGF"><span class="toc-number">1.5.2.</span> <span class="toc-text">指数型生成函数（EGF)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97-1"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">基本运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%81%E9%97%AD%E5%BD%A2%E5%BC%8F-1"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">封闭形式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8B%84%E5%88%A9%E5%85%8B%E9%9B%B7%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0-DGF"><span class="toc-number">1.5.3.</span> <span class="toc-text">狄利克雷生成函数(DGF)</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/08/09/Windows+VSCode%20%E4%B8%AD%E4%BD%BF%E7%94%A8%20clangd/" title="Windows+VSCode 中使用 clangd"><img src="https://s1.328888.xyz/2022/07/15/LQIZp.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Windows+VSCode 中使用 clangd"/></a><div class="content"><a class="title" href="/2022/08/09/Windows+VSCode%20%E4%B8%AD%E4%BD%BF%E7%94%A8%20clangd/" title="Windows+VSCode 中使用 clangd">Windows+VSCode 中使用 clangd</a><time datetime="2022-08-09T08:58:22.887Z" title="发表于 2022-08-09 16:58:22">2022-08-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/09/Command%20Runner%20%E9%80%8F%E5%BD%BB%E6%8C%87%E5%8D%97(VSCode)/" title="Command Runner 透彻指南(VSCode)"><img src="https://s1.328888.xyz/2022/06/07/zhIJy.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Command Runner 透彻指南(VSCode)"/></a><div class="content"><a class="title" href="/2022/08/09/Command%20Runner%20%E9%80%8F%E5%BD%BB%E6%8C%87%E5%8D%97(VSCode)/" title="Command Runner 透彻指南(VSCode)">Command Runner 透彻指南(VSCode)</a><time datetime="2022-08-09T08:57:57.407Z" title="发表于 2022-08-09 16:57:57">2022-08-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/09/%E8%87%AA%E5%8A%A8%E5%8F%96%E6%A8%A1%E6%95%B0%E6%9D%BF%E5%AD%90/" title="自动取模数板子"><img src="https://s1.328888.xyz/2022/06/07/zhh7q.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="自动取模数板子"/></a><div class="content"><a class="title" href="/2022/08/09/%E8%87%AA%E5%8A%A8%E5%8F%96%E6%A8%A1%E6%95%B0%E6%9D%BF%E5%AD%90/" title="自动取模数板子">自动取模数板子</a><time datetime="2022-08-09T08:57:47.881Z" title="发表于 2022-08-09 16:57:47">2022-08-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/09/%E7%BD%91%E7%BB%9C%E6%B5%81/" title="网络流"><img src="https://s1.328888.xyz/2022/06/07/zhRWk.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="网络流"/></a><div class="content"><a class="title" href="/2022/08/09/%E7%BD%91%E7%BB%9C%E6%B5%81/" title="网络流">网络流</a><time datetime="2022-08-09T08:57:36.702Z" title="发表于 2022-08-09 16:57:36">2022-08-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/09/%E6%95%B0%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="数论学习笔记"><img src="https://s1.328888.xyz/2022/07/19/l2G1w.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数论学习笔记"/></a><div class="content"><a class="title" href="/2022/08/09/%E6%95%B0%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="数论学习笔记">数论学习笔记</a><time datetime="2022-08-09T08:57:27.336Z" title="发表于 2022-08-09 16:57:27">2022-08-09</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Ptilopsis_w</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script><script>function addGitalkSource () {
+  const ele = document.createElement('link')
+  ele.rel = 'stylesheet'
+  ele.href= 'https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css'
+  document.getElementsByTagName('head')[0].appendChild(ele)
+}
+
+function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: '6fc00a26de66aa445fdc',
+      clientSecret: '3eed072e6021d1c30199ad18b0d361ea46783998',
+      repo: 'blog-comment',
+      owner: 'Ptilopsisw',
+      admin: ['Ptilopsisw'],
+      id: '84acd9d7a5df90e820720c06696a0494',
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    addGitalkSource()
+    getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !false) {
+  if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
