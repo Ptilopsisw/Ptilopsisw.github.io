@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>自动取模数板子 | Ptilopsis_w's little blog</title><meta name="author" content="Ptilopsis_w"><meta name="copyright" content="Ptilopsis_w"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="用法字面意思，自动对一个数取模。 其中内置了快速幂qpow(a,b)和求逆元inv(a)，其中求逆元使用exgcd实现。 除法使用的是inv(a)实现，自带一个小log，如果卡时间的话请自行处理逆元。 默认对 998244353 取模，如要修改请修改 pmod 变量的值。 使用 modnum name; 来定义一个自动取模数。 可以用 (modnum).val 来获得自动取模数的真实值(long">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>自动取模数板子 | Ptilopsis_w's little blog</title><meta name="author" content="Ptilopsis_w"><meta name="copyright" content="Ptilopsis_w"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="用法字面意思，自动对一个数取模。 其中内置了快速幂qpow(a,b)和求逆元inv(a)，其中求逆元使用exgcd实现。 除法使用的是inv(a)实现，自带一个小log，如果卡时间的话请自行处理逆元。 默认对 998244353 取模，如要修改请修改 pmod 变量的值。 使用 modnum name; 来定义一个自动取模数。 可以用 (modnum).val 来获得自动取模数的真实值(long">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自动取模数板子">
 <meta property="og:url" content="http://example.com/2022/08/09/%E8%87%AA%E5%8A%A8%E5%8F%96%E6%A8%A1%E6%95%B0%E6%9D%BF%E5%AD%90/index.html">
@@ -118,7 +118,7 @@
       win.activateLightMode = function () {
         document.documentElement.setAttribute('data-theme', 'light')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
         }
       }
       const t = saveToLocal.get('theme')

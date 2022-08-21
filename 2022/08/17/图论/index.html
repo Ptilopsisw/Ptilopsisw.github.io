@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>图论 | Ptilopsis_w's little blog</title><meta name="author" content="Ptilopsis_w"><meta name="copyright" content="Ptilopsis_w"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="并查集这个没什么好讲的，带权和扩展域相信大家都会，这里就给一道有意思的题吧 link 这个题并查集显然不能直接做，因为修改一个节点也会影响它的儿子，我们要想办法对他儿子的影响给去掉。 于是我们可以借鉴扩展域并查集的思想，新开一倍的节点，用 i+n 来代表合并并查集时用的节点，这样我们修改 i 时，不会影响 i+n 的父亲，达到了单点修改的目的。 二分图二分图最大匹配貌似大家只会敲dinic的样子，">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>图论 | Ptilopsis_w's little blog</title><meta name="author" content="Ptilopsis_w"><meta name="copyright" content="Ptilopsis_w"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="并查集这个没什么好讲的，带权和扩展域相信大家都会，这里就给一道有意思的题吧 link 这个题并查集显然不能直接做，因为修改一个节点也会影响它的儿子，我们要想办法对他儿子的影响给去掉。 于是我们可以借鉴扩展域并查集的思想，新开一倍的节点，用 i+n 来代表合并并查集时用的节点，这样我们修改 i 时，不会影响 i+n 的父亲，达到了单点修改的目的。 二分图二分图最大匹配貌似大家只会敲dinic的样子，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图论">
 <meta property="og:url" content="http://example.com/2022/08/17/%E5%9B%BE%E8%AE%BA/index.html">
@@ -118,7 +118,7 @@
       win.activateLightMode = function () {
         document.documentElement.setAttribute('data-theme', 'light')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
         }
       }
       const t = saveToLocal.get('theme')
