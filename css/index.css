@@ -1359,7 +1359,7 @@ canvas:not(#ribbon-canvas),
   --text-bg-hover: rgba(73,177,245,0.7);
   --light-grey: #eee;
   --dark-grey: #cacaca;
-  --white: rgba(255,255,255,0.376);
+  --white: rgba(255,255,255,0.9);
   --text-highlight-color: #1f2d3d;
   --blockquote-color: #6a737d;
   --blockquote-bg: rgba(73,177,245,0.1);
